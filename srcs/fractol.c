@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/24 15:20:29 by alexis           ###   ########.fr       */
+/*   Updated: 2025/02/24 15:32:37 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,12 @@ int	close_window(int keycode, t_window *window)
 	return (0);
 }
 
+int	destroy_window(t_window *window)
+{
+	mlx_destroy_window(window->connection, window->ptr);
+	exit(0);
+}
+
 int	main(void)
 {
 	t_window	window;
@@ -58,6 +64,7 @@ int	main(void)
 	window.connection = mlx_init();
 	window.ptr = mlx_new_window(window.connection, DEFAULT_WIDTH, DEFAULT_HEIGHT, "Fractol");
 	mlx_hook(window.ptr, 2, 1L<<0, close_window, &window);
+	mlx_hook(window.ptr, 17, 1L<<17, destroy_window, &window);
 	mlx_loop(window.connection);
 	return (0);
 }
