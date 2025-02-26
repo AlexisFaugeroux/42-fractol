@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+         #
+#    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/02/21 18:53:35 by afaugero         ###   ########.fr        #
+#    Updated: 2025/02/26 19:15:25 by alexis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 #Sources
 SRCS_DIR		= srcs/
-SRCS_FILES		= fractol.c
+SRCS_FILES		= fractol.c \
+					render.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 #Objects

@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/26 12:31:56 by alexis           ###   ########.fr       */
+/*   Updated: 2025/02/28 11:15:18 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 
 # include "../libft/libft.h"
 # include "../mlx_linux/mlx.h"
+# include <stdio.h>
+# include <math.h>
 
-# define DEFAULT_WIDTH 1920
-# define DEFAULT_HEIGHT 1080
+# define WIDTH 1920
+# define HEIGHT 1080
 # define ESCAPE_KEY 65307
 
 typedef struct s_win
@@ -39,6 +41,17 @@ typedef struct s_fractal
 {
 	struct s_win	*win;
 	struct s_img	*img;
+	int				max_iter;
 }				t_fractal;
+
+typedef struct s_complex
+{
+	double	Re;
+	double	Im;
+	double	modulo;
+}				t_complex;
+
+void	render(t_fractal *fractal);
+void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 #endif

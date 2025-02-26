@@ -6,13 +6,13 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/26 12:35:32 by alexis           ###   ########.fr       */
+/*   Updated: 2025/02/28 12:01:00 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
 
-void	pixel_put(t_img *img, int x, int y, int color)
+void	put_pixel_to_image(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 	int		offset;
@@ -48,6 +48,7 @@ void	clean_up(t_fractal *fractal)
 		free(fractal->win);
 	if (fractal->img)
 		free(fractal->img);
+	mlx_destroy_display(fractal->win->connection);
 }
 
 void	init_fractal(t_fractal *fractal)
@@ -60,15 +61,27 @@ void	init_fractal(t_fractal *fractal)
 		exit(EXIT_FAILURE);
 	}
 	fractal->win->connection = mlx_init();
-	fractal->win->win_ptr = mlx_new_window(fractal->win->connection, DEFAULT_WIDTH, DEFAULT_HEIGHT, "Fractol");
+	if (!fractal->win->connection)
+	{
+		clean_up(fractal);
+		exit(EXIT_FAILURE);
+	}
+	fractal->win->win_ptr = mlx_new_window(fractal->win->connection, WIDTH, HEIGHT, "Fractol");
+	if (!fractal->win->win_ptr)
+	{
+		clean_up(fractal);
+		exit(EXIT_FAILURE);
+	}
 
-	fractal->img->img_ptr = mlx_new_image(fractal->win->connection, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	fractal->img->img_ptr = mlx_new_image(fractal->win->connection, WIDTH, HEIGHT);
 	fractal->img->pixels = mlx_get_data_addr(
 			fractal->img->img_ptr,
 			&(fractal->img->bpp),
 			&(fractal->img->line_len),
 			&(fractal->img->endian)
 		);
+
+	fractal->max_iter = 5;
 }
 
 void	init_hooks(t_fractal *fractal)
@@ -84,8 +97,7 @@ int	main(void)
 	init_fractal(&fractal);
 	init_hooks(&fractal);
 
-	pixel_put(fractal.img, DEFAULT_WIDTH / 2, DEFAULT_HEIGHT / 2, 0X00FF0000);
-	mlx_put_image_to_window(fractal.win->connection, fractal.win->win_ptr, fractal.img->img_ptr, 0, 0);
+	render(&fractal);
 
 	mlx_loop(fractal.win->connection);
 	clean_up(&fractal);
