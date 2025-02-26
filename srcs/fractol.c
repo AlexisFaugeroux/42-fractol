@@ -6,65 +6,88 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/24 15:32:37 by alexis           ###   ########.fr       */
+/*   Updated: 2025/02/26 12:35:32 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-#define DEFAULT_WIDTH 1920
-#define DEFAULT_HEIGHT 1080
-#define ESCAPE_KEY 65307
 
-typedef struct s_window
-{
-	void	*connection;
-	void	*ptr;
-}				t_window;
-
-typedef struct s_image
-{
-	void	*img;
-	char	*addr;
-	int		bits_per_pixels;
-	int		line_length;
-	int		endian;
-}				t_image;
-
-void	my_mlx_pixel_put(t_image *image, int x, int y, int color)
+void	pixel_put(t_img *img, int x, int y, int color)
 {
 	char	*dst;
 	int		offset;
 
-	offset = (y * image->line_length + x * (image->bits_per_pixels / 8));
-	dst = image->addr + offset;
+	offset = (y * img->line_len + x * (img->bpp / 8));
+	dst = img->pixels + offset;
 	*(unsigned int *)dst = (unsigned int)color;
 }
 
-int	close_window(int keycode, t_window *window)
+int	close_window(int keycode, t_fractal *fractal)
 {
 	if (keycode == ESCAPE_KEY)
 	{
-		mlx_destroy_window(window->connection, window->ptr);
+		if (fractal->img->img_ptr)
+			mlx_destroy_image(fractal->win->connection, fractal->img->img_ptr);
+		mlx_destroy_window(fractal->win->connection, fractal->win->win_ptr);
 		exit(0);
 	}
 	return (0);
 }
 
-int	destroy_window(t_window *window)
+int	destroy_window(t_fractal *fractal)
 {
-	mlx_destroy_window(window->connection, window->ptr);
+	if (fractal->img->img_ptr)
+		mlx_destroy_image(fractal->win->connection, fractal->img->img_ptr);
+	mlx_destroy_window(fractal->win->connection, fractal->win->win_ptr);
 	exit(0);
+}
+
+void	clean_up(t_fractal *fractal)
+{
+	if (fractal->win)
+		free(fractal->win);
+	if (fractal->img)
+		free(fractal->img);
+}
+
+void	init_fractal(t_fractal *fractal)
+{
+	fractal->win = (t_win *)malloc(sizeof(t_win));
+	fractal->img = (t_img *)malloc(sizeof(t_img));
+	if (!fractal->win || !fractal->img)
+	{
+		clean_up(fractal);
+		exit(EXIT_FAILURE);
+	}
+	fractal->win->connection = mlx_init();
+	fractal->win->win_ptr = mlx_new_window(fractal->win->connection, DEFAULT_WIDTH, DEFAULT_HEIGHT, "Fractol");
+
+	fractal->img->img_ptr = mlx_new_image(fractal->win->connection, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+	fractal->img->pixels = mlx_get_data_addr(
+			fractal->img->img_ptr,
+			&(fractal->img->bpp),
+			&(fractal->img->line_len),
+			&(fractal->img->endian)
+		);
+}
+
+void	init_hooks(t_fractal *fractal)
+{
+	mlx_hook(fractal->win->win_ptr, 2, 1L<<0, close_window, fractal);
+	mlx_hook(fractal->win->win_ptr, 17, 1L<<17, destroy_window, fractal);
 }
 
 int	main(void)
 {
-	t_window	window;
-	// t_image	image;
+	t_fractal	fractal;
 
-	window.connection = mlx_init();
-	window.ptr = mlx_new_window(window.connection, DEFAULT_WIDTH, DEFAULT_HEIGHT, "Fractol");
-	mlx_hook(window.ptr, 2, 1L<<0, close_window, &window);
-	mlx_hook(window.ptr, 17, 1L<<17, destroy_window, &window);
-	mlx_loop(window.connection);
+	init_fractal(&fractal);
+	init_hooks(&fractal);
+
+	pixel_put(fractal.img, DEFAULT_WIDTH / 2, DEFAULT_HEIGHT / 2, 0X00FF0000);
+	mlx_put_image_to_window(fractal.win->connection, fractal.win->win_ptr, fractal.img->img_ptr, 0, 0);
+
+	mlx_loop(fractal.win->connection);
+	clean_up(&fractal);
 	return (0);
 }
