@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/28 17:37:23 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/02/28 22:14:22 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	init_fractal(t_fractal *fractal)
 			&(fractal->img->line_len),
 			&(fractal->img->endian)
 			);
+	fractal->color = 0x0000FFFF;
 	fractal->max_iter = 100;
 }
 

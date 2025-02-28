@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/28 17:37:41 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/02/28 22:11:57 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,23 @@ int	compute(t_fractal *fractal, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
-	int			color;
-	int			k;
+	int			i;
 
 	z.Re = 0;
 	z.Im = 0;
 	c.Re = interpolate(x, 0, WIDTH, -2, 2);
 	c.Im = interpolate(y, 0, HEIGHT, -2, 2);
-	/* printf("RE: %lf\n", c.Re);
-	printf("IM: %lf\n", c.Im); */
-	color = 0XFFFFFFFF;
-	k = 0;
-	while (k < fractal->max_iter)
+	i = 0;
+	while (i < fractal->max_iter)
 	{
 		if (modulo(z.Re, z.Im) > 2)
-		{
-			color = 0X00000000;
 			break ;
-		}
 		compute_next_elem(&z, &c);
-		k++;
+		i++;
 	}
-	return (color);
+	if (i == fractal->max_iter)
+		return (0x00000000);
+	return (interpolate(i, 0, fractal->max_iter, fractal->color, 0xFFFFFFFF));
 }
 
 void	render(t_fractal *fractal)
