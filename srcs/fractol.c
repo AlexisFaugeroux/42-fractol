@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/28 12:01:00 by alexis           ###   ########.fr       */
+/*   Updated: 2025/02/28 17:37:23 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,28 +66,29 @@ void	init_fractal(t_fractal *fractal)
 		clean_up(fractal);
 		exit(EXIT_FAILURE);
 	}
-	fractal->win->win_ptr = mlx_new_window(fractal->win->connection, WIDTH, HEIGHT, "Fractol");
+	fractal->win->win_ptr = mlx_new_window(
+			fractal->win->connection,
+			WIDTH, HEIGHT,
+			"Fractol");
 	if (!fractal->win->win_ptr)
 	{
 		clean_up(fractal);
 		exit(EXIT_FAILURE);
 	}
-
 	fractal->img->img_ptr = mlx_new_image(fractal->win->connection, WIDTH, HEIGHT);
 	fractal->img->pixels = mlx_get_data_addr(
 			fractal->img->img_ptr,
 			&(fractal->img->bpp),
 			&(fractal->img->line_len),
 			&(fractal->img->endian)
-		);
-
-	fractal->max_iter = 5;
+			);
+	fractal->max_iter = 100;
 }
 
 void	init_hooks(t_fractal *fractal)
 {
-	mlx_hook(fractal->win->win_ptr, 2, 1L<<0, close_window, fractal);
-	mlx_hook(fractal->win->win_ptr, 17, 1L<<17, destroy_window, fractal);
+	mlx_hook(fractal->win->win_ptr, 2, 1L << 0, close_window, fractal);
+	mlx_hook(fractal->win->win_ptr, 17, 1L << 17, destroy_window, fractal);
 }
 
 int	main(void)
@@ -96,9 +97,7 @@ int	main(void)
 
 	init_fractal(&fractal);
 	init_hooks(&fractal);
-
 	render(&fractal);
-
 	mlx_loop(fractal.win->connection);
 	clean_up(&fractal);
 	return (0);
