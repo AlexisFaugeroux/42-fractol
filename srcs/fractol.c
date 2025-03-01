@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/28 22:14:22 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 16:21:46 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,19 @@ void	init_fractal(t_fractal *fractal)
 			&(fractal->img->line_len),
 			&(fractal->img->endian)
 			);
-	fractal->color = 0x0000FFFF;
-	fractal->max_iter = 100;
+	fractal->colors[0] = 0x00000033;
+	fractal->colors[1] = 0x00220066;
+	fractal->colors[2] = 0x00440099;
+	fractal->colors[3] = 0x006600CC;
+	fractal->colors[4] = 0x008800FF;
+	fractal->colors[5] = 0x00AA33FF;
+	fractal->colors[6] = 0x00CC66FF;
+	fractal->colors[7] = 0x00FF9966;
+	fractal->colors[8] = 0x00FF7733;
+	fractal->colors[9] = 0x00FFAA88;
+	fractal->colors[10] = 0x00FFFF99;
+	fractal->colors[11] = 0x00FFFFFF;
+	fractal->max_iter = 256;
 }
 
 void	init_hooks(t_fractal *fractal)

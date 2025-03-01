@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/02/28 21:38:19 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 15:53:03 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ESCAPE_KEY 65307
+# define GAMMA 2.2
 
 typedef struct s_win
 {
@@ -41,7 +42,7 @@ typedef struct s_fractal
 {
 	struct s_win	*win;
 	struct s_img	*img;
-	int				color;
+	int				colors[3];
 	int				max_iter;
 }				t_fractal;
 
