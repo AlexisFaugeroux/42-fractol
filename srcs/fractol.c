@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 22:20:54 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 23:00:15 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,18 @@ t_fractal	*init_fractal()
 		exit(EXIT_FAILURE);
 	}
 	init_imgs(fractal);
-	fractal->colors[0] = 0x00000033;
-	fractal->colors[1] = 0x00220066;
-	fractal->colors[2] = 0x00440099;
-	fractal->colors[3] = 0x006600CC;
-	fractal->colors[4] = 0x008800FF;
-	fractal->colors[5] = 0x00AA33FF;
-	fractal->colors[6] = 0x00CC66FF;
-	fractal->colors[7] = 0x00FF9966;
-	fractal->colors[8] = 0x00FF7733;
-	fractal->colors[9] = 0x00FFAA88;
-	fractal->colors[10] = 0x00FFFF99;
-	fractal->colors[11] = 0x00FFFFFF;
+	fractal->palette[0] = 0x00000033;
+	fractal->palette[1] = 0x00220066;
+	fractal->palette[2] = 0x00440099;
+	fractal->palette[3] = 0x006600CC;
+	fractal->palette[4] = 0x008800FF;
+	fractal->palette[5] = 0x00AA33FF;
+	fractal->palette[6] = 0x00CC66FF;
+	fractal->palette[7] = 0x00FF9966;
+	fractal->palette[8] = 0x00FF7733;
+	fractal->palette[9] = 0x00FFAA88;
+	fractal->palette[10] = 0x00FFFF99;
+	fractal->palette[11] = 0x00FFFFFF;
 	fractal->max_iter = 256;
 	fractal->zoom = 1;
 	return (fractal);
@@ -120,7 +120,8 @@ int	main(void)
 
 	fractal = init_fractal();
 	init_hooks(fractal);
-	pre_compute(fractal);
+	pre_compute_colors(fractal);
+	pre_compute_c(fractal);
 	mlx_loop_hook(fractal->win->connection, (void *)render, fractal);
 	mlx_loop(fractal->win->connection);
 	clean_up(fractal);

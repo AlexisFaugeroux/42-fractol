@@ -6,24 +6,11 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 22:26:18 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 22:56:44 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-int	interpolate_color(double t, int color_1, int color_2)
-{
-	int	r;
-	int	g;
-	int	b;
- 
-	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
-	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
-	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
-
-	return (r << 16 | g << 8 | b);
-}
 
 /* int	clamp(int value, int min, int max)
 {
@@ -77,7 +64,7 @@ double	smooth_factor(t_complex z, int iteration)
 	double	nu;
 	double	smooth;
 	
-	log_zn = log(z.Re * z.Re + z.Im * z.Im) / 2.0;
+	log_zn = log(z.Re * z.Re + z.Im * z.Im) / 2;
 	nu = log(log_zn / log(2)) / log(2);
 	smooth = iteration + 1 - nu;
 	return (smooth);
@@ -88,15 +75,13 @@ int	compute(t_fractal *fractal, int x, int y)
 	t_complex	z;
 	t_complex	c;
 	int			i;
-	int			color_1;
-	int			color_2;
 	double		smooth;
 	double		t;
 
 	z.Re = 0;
 	z.Im = 0;
-	c.Re = fractal->pre_computed[y][x].Re * fractal->zoom;
-	c.Im = fractal->pre_computed[y][x].Im * fractal->zoom;
+	c.Re = fractal->pre_computed_c[y][x].Re * fractal->zoom;
+	c.Im = fractal->pre_computed_c[y][x].Im * fractal->zoom;
 	i = 0;
 	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
@@ -104,12 +89,10 @@ int	compute(t_fractal *fractal, int x, int y)
 		i++;
 	}
 	if (i == fractal->max_iter)
-		return (0x00000000);
+		return (BLACK);
 	smooth = smooth_factor(z, i);
-	color_1 = fractal->colors[(int)smooth % 12];
-	color_2 = fractal->colors[((int)smooth + 1) % 12];
 	t = smooth - (int)smooth;
-	return (interpolate_color(t, color_1, color_2));
+	return (fractal->pre_computed_colors[(int)t * 255]);
 }
 
 void	render(t_fractal *fractal)
