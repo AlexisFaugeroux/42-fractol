@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/01 23:01:17 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 00:52:20 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,18 @@ void	pre_compute_c(t_fractal *fractal)
 
 void	pre_compute_colors(t_fractal *fractal)
 {
-	int	color_1;
-	int	color_2;
-	int	i;
+	int		color_1;
+	int		color_2;
+	int		i;
+	double	t;
 
 	i = 0;
-	while (i < 256)
+	while (i < 1024)
 	{
+		t = log2(1 + (double)i) / log2(1024);
 		color_1 = fractal->palette[i % 12];
 		color_2 = fractal->palette[(i + 1) % 12];
-		fractal->pre_computed_colors[i] = interpolate_color(i, color_1, color_2);
+		fractal->pre_computed_colors[i] = interpolate_color(t, color_1, color_2);
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 22:56:44 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 00:43:58 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,19 @@ int gamma_interpolate(double t, int color_1, int color_2)
 	return ((int)r << 16 | (int)g << 8 | (int)b);
 } */
 
+/* static int	interpolate_color(double t, int color_1, int color_2)
+{
+	int	r;
+	int	g;
+	int	b;
+ 
+	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
+	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
+	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
+
+	return (r << 16 | g << 8 | b);
+} */
+
 void	compute_next_elem(t_complex *z, t_complex *c)
 {
 	t_complex	tmp;
@@ -75,8 +88,10 @@ int	compute(t_fractal *fractal, int x, int y)
 	t_complex	z;
 	t_complex	c;
 	int			i;
+	/* int			color_1;
+	int			color_2;
 	double		smooth;
-	double		t;
+	double		t; */
 
 	z.Re = 0;
 	z.Im = 0;
@@ -89,10 +104,12 @@ int	compute(t_fractal *fractal, int x, int y)
 		i++;
 	}
 	if (i == fractal->max_iter)
-		return (BLACK);
-	smooth = smooth_factor(z, i);
-	t = smooth - (int)smooth;
-	return (fractal->pre_computed_colors[(int)t * 255]);
+		return (0x00000000);
+	/* smooth = smooth_factor(z, i);
+	color_1 = fractal->palette[(int)smooth % 12];
+	color_2 = fractal->palette[((int)smooth + 1) % 12];
+	t = smooth - (int)smooth; */
+	return (fractal->pre_computed_colors[i]);
 }
 
 void	render(t_fractal *fractal)

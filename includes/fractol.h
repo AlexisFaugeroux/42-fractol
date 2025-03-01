@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 23:00:27 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 23:25:30 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_fractal
 	struct s_img		*buffer;
 	struct s_complex	pre_computed_c[HEIGHT][WIDTH];
 	int					palette[12];
-	int					pre_computed_colors[256];
+	int					pre_computed_colors[1024];
 	int					max_iter;
 	double				zoom;
 }				t_fractal;
