@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 16:21:46 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 18:04:09 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,23 @@ int	destroy_window(t_fractal *fractal)
 
 void	clean_up(t_fractal *fractal)
 {
-	if (fractal->win)
-		free(fractal->win);
 	if (fractal->img)
 		free(fractal->img);
-	mlx_destroy_display(fractal->win->connection);
+	if (fractal->win)
+	{
+		mlx_destroy_display(fractal->win->connection);
+		free(fractal->win);
+	}
+	free(fractal);
 }
 
-void	init_fractal(t_fractal *fractal)
+t_fractal	*init_fractal()
 {
+	t_fractal *fractal;
+
+	fractal = (t_fractal *)malloc(sizeof(t_fractal));
+	if (!fractal)
+		exit(EXIT_FAILURE);
 	fractal->win = (t_win *)malloc(sizeof(t_win));
 	fractal->img = (t_img *)malloc(sizeof(t_img));
 	if (!fractal->win || !fractal->img)
@@ -95,22 +103,37 @@ void	init_fractal(t_fractal *fractal)
 	fractal->colors[10] = 0x00FFFF99;
 	fractal->colors[11] = 0x00FFFFFF;
 	fractal->max_iter = 256;
+	fractal->zoom = 1;
+
+	return (fractal);
+}
+
+int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
+{
+	(void)x;
+	(void)y;
+	if (keycode == 4)
+		fractal->zoom *= 1.1;
+	else if (keycode == 5)
+		fractal->zoom *= 0.9;
+	return (0);
 }
 
 void	init_hooks(t_fractal *fractal)
 {
 	mlx_hook(fractal->win->win_ptr, 2, 1L << 0, close_window, fractal);
 	mlx_hook(fractal->win->win_ptr, 17, 1L << 17, destroy_window, fractal);
+	mlx_mouse_hook(fractal->win->win_ptr, handle_mouse_event, fractal);
 }
 
 int	main(void)
 {
-	t_fractal	fractal;
+	t_fractal	*fractal;
 
-	init_fractal(&fractal);
-	init_hooks(&fractal);
-	render(&fractal);
-	mlx_loop(fractal.win->connection);
-	clean_up(&fractal);
+	fractal = init_fractal();
+	init_hooks(fractal);
+	mlx_loop_hook(fractal->win->connection, (void *)render, fractal);
+	mlx_loop(fractal->win->connection);
+	clean_up(fractal);
 	return (0);
 }

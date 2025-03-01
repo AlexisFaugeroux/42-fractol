@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/02/26 19:15:25 by alexis           ###   ########.fr        #
+#    Updated: 2025/03/01 16:58:17 by alexis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ INCLUDES_FLAGS	+= -I$(MLX_DIR)
 
 all: $(LIBFT) $(OBJS_DIR) ${NAME}
 
-$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c | $(OBJS_DIR)
+$(OBJS_DIR)%.o:	$(SRCS_DIR)%.c $(INCLUDES) | $(OBJS_DIR)
 	@${CC} $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
 
 $(LIBFT): $(wildcard $(LIBFT_DIR)/*.c) $(wildcard $(LIBFT_DIR)/*.h)

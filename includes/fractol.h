@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 15:53:03 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 18:02:48 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,9 @@ typedef struct s_fractal
 {
 	struct s_win	*win;
 	struct s_img	*img;
-	int				colors[3];
+	int				colors[12];
 	int				max_iter;
+	double			zoom;
 }				t_fractal;
 
 typedef struct s_complex

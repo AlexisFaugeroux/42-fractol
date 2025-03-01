@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 16:13:23 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 18:04:59 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,20 @@ double	interpolate(double x, double x0, double x1, double y0, double y1)
 	return (y0 + (x - x0) * ((y1 - y0) / (x1 - x0)));
 }
 
-/*
- * Gamma corrected interpolation
- *
- * Linear interpolation like so:
- * int	interpolate_color(double t, int color_1, int color_2)
- * {
- *	int	r;
- *	int	g;
- *	int	b;
- *
- *	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
- *	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
- *
- *	return (r << 16 | g << 8 | b);
- * }
- *
- * does not take into account humain perception which is not linear
- * so we use gamma correction to address that.
- * https://www.dfstudios.co.uk/articles/programming/image-programming-algorithms/image-processing-algorithms-part-6-gamma-correction/
-*/
+int	interpolate_color(double t, int color_1, int color_2)
+{
+	int	r;
+	int	g;
+	int	b;
+ 
+	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
+	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
+	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
 
-int	clamp(int value, int min, int max)
+	return (r << 16 | g << 8 | b);
+}
+
+/* int	clamp(int value, int min, int max)
 {
 	if (value < min)
 		return (min);
@@ -74,7 +66,7 @@ int gamma_interpolate(double t, int color_1, int color_2)
 	b = pow((1 - t) * b1 + t * b2, 1.0 / GAMMA) * 255;
 	b = clamp(b, 0, 255);
 	return ((int)r << 16 | (int)g << 8 | (int)b);
-}
+} */
 
 void	compute_next_elem(t_complex *z, t_complex *c)
 {
@@ -82,8 +74,8 @@ void	compute_next_elem(t_complex *z, t_complex *c)
 
 	tmp.Re = z->Re;
 	tmp.Im = z->Im;
-	z->Re = (z->Re * z->Re) - (z->Im * z->Im) + c->Re;
-	z->Im = (2 * tmp.Re * tmp.Im) + c->Im;
+	z->Re = ((z->Re * z->Re) - (z->Im * z->Im) + c->Re);
+	z->Im = ((2 * tmp.Re * tmp.Im) + c->Im);
 }
 
 double	modulo(double Re, double Im)
@@ -115,8 +107,8 @@ int	compute(t_fractal *fractal, int x, int y)
 
 	z.Re = 0;
 	z.Im = 0;
-	c.Re = interpolate(x, 0, WIDTH, -2, 2);
-	c.Im = interpolate(y, 0, HEIGHT, -2, 2);
+	c.Re = interpolate(x, 0, WIDTH, -2, 2) * fractal->zoom;
+	c.Im = interpolate(y, 0, HEIGHT, -2, 2) * fractal->zoom;
 	i = 0;
 	while (i < fractal->max_iter && modulo(z.Re, z.Im) <= 2)
 	{
@@ -129,7 +121,7 @@ int	compute(t_fractal *fractal, int x, int y)
 	color_1 = fractal->colors[(int)smooth % 12];
 	color_2 = fractal->colors[((int)smooth + 1) % 12];
 	t = smooth - (int)smooth;
-	return (gamma_interpolate(t, color_1, color_2));
+	return (interpolate_color(t, color_1, color_2));
 }
 
 void	render(t_fractal *fractal)
