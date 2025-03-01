@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/01 16:58:17 by alexis           ###   ########.fr        #
+#    Updated: 2025/03/01 22:01:51 by alexis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,9 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 #Sources
 SRCS_DIR		= srcs/
 SRCS_FILES		= fractol.c \
-					render.c
+					pre_compute.c \
+					render.c \
+					handlers/handlers.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 #Objects
@@ -69,7 +71,7 @@ $(MLX) :
 	@echo $(GREEN) "mlx created" $(RESET)
 
 $(OBJS_DIR):
-	@mkdir -p $(OBJS_DIR)
+	@mkdir -p $(OBJS_DIR) $(addprefix $(OBJS_DIR), $(dir $(SRCS_FILES)))
 
 $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@echo "compiling $(NAME)..."

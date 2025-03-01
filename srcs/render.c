@@ -6,18 +6,11 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 18:04:59 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 22:26:18 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-double	interpolate(double x, double x0, double x1, double y0, double y1)
-{
-	if (x1 == x0)
-		return (0);
-	return (y0 + (x - x0) * ((y1 - y0) / (x1 - x0)));
-}
 
 int	interpolate_color(double t, int color_1, int color_2)
 {
@@ -78,11 +71,6 @@ void	compute_next_elem(t_complex *z, t_complex *c)
 	z->Im = ((2 * tmp.Re * tmp.Im) + c->Im);
 }
 
-double	modulo(double Re, double Im)
-{
-	return (sqrt((Re * Re) + (Im * Im)));
-}
-
 double	smooth_factor(t_complex z, int iteration)
 {
 	double	log_zn;
@@ -107,10 +95,10 @@ int	compute(t_fractal *fractal, int x, int y)
 
 	z.Re = 0;
 	z.Im = 0;
-	c.Re = interpolate(x, 0, WIDTH, -2, 2) * fractal->zoom;
-	c.Im = interpolate(y, 0, HEIGHT, -2, 2) * fractal->zoom;
+	c.Re = fractal->pre_computed[y][x].Re * fractal->zoom;
+	c.Im = fractal->pre_computed[y][x].Im * fractal->zoom;
 	i = 0;
-	while (i < fractal->max_iter && modulo(z.Re, z.Im) <= 2)
+	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
 		compute_next_elem(&z, &c);
 		i++;
@@ -126,9 +114,10 @@ int	compute(t_fractal *fractal, int x, int y)
 
 void	render(t_fractal *fractal)
 {
-	int	x;
-	int	y;
-	int	color;
+	int		x;
+	int		y;
+	int		color;
+	t_img	*tmp;
 
 	y = 0;
 	while (y < HEIGHT)
@@ -137,11 +126,14 @@ void	render(t_fractal *fractal)
 		while (x < WIDTH)
 		{
 			color = compute(fractal, x, y);
-			put_pixel_to_image(fractal->img, x, y, color);
+			put_pixel_to_image(fractal->buffer, x, y, color);
 			x++;
 		}
 		y++;
 	}
+	tmp = fractal->img;
+	fractal->img = fractal->buffer;
+	fractal->buffer = tmp;
 	mlx_put_image_to_window(
 		fractal->win->connection,
 		fractal->win->win_ptr,

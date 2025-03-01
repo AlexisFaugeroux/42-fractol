@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 18:02:48 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/01 22:10:56 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,12 @@ typedef struct s_win
 
 typedef struct s_img
 {
-	void	*img_ptr; // pointer to image struct
-	char	*pixels; // pointer to pixels
+	void	*img_ptr;
+	char	*pixels;
 	int		bpp;
 	int		line_len;
 	int		endian;
 }				t_img;
-
-typedef struct s_fractal
-{
-	struct s_win	*win;
-	struct s_img	*img;
-	int				colors[12];
-	int				max_iter;
-	double			zoom;
-}				t_fractal;
 
 typedef struct s_complex
 {
@@ -53,7 +44,24 @@ typedef struct s_complex
 	double	Im;
 }				t_complex;
 
+typedef struct s_fractal
+{
+	struct s_win		*win;
+	struct s_img		*img;
+	struct s_img		*buffer;
+	struct s_complex	pre_computed[HEIGHT][WIDTH];
+	int					colors[12];
+	int					max_iter;
+	double				zoom;
+}				t_fractal;
+
 void	render(t_fractal *fractal);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
+// handlers
+int	close_window(int keycode, t_fractal *fractal);
+int	destroy_window(t_fractal *fractal);
+int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
+// compute
+void	pre_compute(t_fractal *fractal);
 
 #endif
