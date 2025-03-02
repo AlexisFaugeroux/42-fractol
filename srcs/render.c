@@ -6,60 +6,11 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 12:37:55 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 14:20:06 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fractol.h"
-
-/* int	clamp(int value, int min, int max)
-{
-	if (value < min)
-		return (min);
-	if (value > max)
-		return (max);
-	return (value);
-}
-
-int gamma_interpolate(double t, int color_1, int color_2)
-{
-	double r1;
-	double r2;
-	double r;
-	double g1;
-	double g2;
-	double g;
-	double b1;
-	double b2;
-	double b;
-
-	r1 = pow(((color_1 >> 16) & 0xFF) / 255.0, GAMMA);
-	r2 = pow(((color_2 >> 16) & 0xFF) / 255.0, GAMMA);
-	r = pow((1 - t) * r1 + t * r2, 1.0 / GAMMA) * 255;
-	r = clamp(r, 0, 255);
-	g1 = pow(((color_1 >> 8) & 0xFF) / 255.0, GAMMA);
-	g2 = pow(((color_2 >> 8) & 0xFF) / 255.0, GAMMA);
-	g = pow((1 - t) * g1 + t * g2, 1.0 / GAMMA) * 255;
-	g = clamp(g, 0, 255);
-	b1 = pow(((color_1) & 0xFF) / 255.0, GAMMA);
-	b2 = pow(((color_2) & 0xFF) / 255.0, GAMMA);
-	b = pow((1 - t) * b1 + t * b2, 1.0 / GAMMA) * 255;
-	b = clamp(b, 0, 255);
-	return ((int)r << 16 | (int)g << 8 | (int)b);
-} */
-
-/* static int	interpolate_color(double t, int color_1, int color_2)
-{
-	int	r;
-	int	g;
-	int	b;
- 
-	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
-	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
-	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
-
-	return (r << 16 | g << 8 | b);
-} */
 
 void	compute_next_elem(t_complex *z, t_complex *c)
 {
@@ -83,7 +34,7 @@ double	smooth_factor(t_complex z, int iteration)
 	return (smooth);
 }
 
-int	compute(t_fractal *fractal, int x, int y)
+int	get_color(t_fractal *fractal, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
@@ -94,8 +45,8 @@ int	compute(t_fractal *fractal, int x, int y)
 
 	z.Re = 0;
 	z.Im = 0;
-	c.Re = fractal->pre_computed_c[y][x].Re * fractal->zoom;
-	c.Im = fractal->pre_computed_c[y][x].Im * fractal->zoom;
+	c.Re = fractal->pre_computed_c[y][x].Re * fractal->zoom + fractal->offset_x;
+	c.Im = fractal->pre_computed_c[y][x].Im * fractal->zoom + fractal->offset_y;
 	i = 0;
 	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
@@ -124,7 +75,7 @@ void	render(t_fractal *fractal)
 		x = 0;
 		while (x < WIDTH)
 		{
-			color = compute(fractal, x, y);
+			color = get_color(fractal, x, y);
 			put_pixel_to_image(fractal->buffer, x, y, color);
 			x++;
 		}

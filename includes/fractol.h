@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 11:41:32 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 13:53:55 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@
 # define WIDTH 1920
 # define HEIGHT 1080
 # define ESCAPE_KEY 65307
+# define ARROW_LEFT_KEY 65361
+# define ARROW_RIGHT_KEY 65363
+# define ARROW_UP_KEY 65364
+# define ARROW_DOWN_KEY 65362
 # define BLACK 0x00000000
 # define GAMMA 2.2
 
@@ -55,13 +59,15 @@ typedef struct s_fractal
 	int					pre_computed_colors[1024];
 	int					max_iter;
 	double				zoom;
+	double				offset_x;
+	double				offset_y;
 }				t_fractal;
 
 void	render(t_fractal *fractal);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 // handlers
-int	close_window(int keycode, t_fractal *fractal);
 int	destroy_window(t_fractal *fractal);
+int	handle_key_pressed(int keycode, t_fractal *fractal);
 int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
 // compute
 void	pre_compute_c(t_fractal *fractal);

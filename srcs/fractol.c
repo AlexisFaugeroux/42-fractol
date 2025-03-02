@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 23:00:15 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 13:42:53 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,14 @@ t_fractal	*init_fractal()
 	fractal->palette[11] = 0x00FFFFFF;
 	fractal->max_iter = 256;
 	fractal->zoom = 1;
+	fractal->offset_x = 0;
+	fractal->offset_y = 0;
 	return (fractal);
 }
 
 void	init_hooks(t_fractal *fractal)
 {
-	mlx_hook(fractal->win->win_ptr, 2, 1L << 0, close_window, fractal);
+	mlx_hook(fractal->win->win_ptr, 2, 1L << 0, handle_key_pressed, fractal);
 	mlx_hook(fractal->win->win_ptr, 17, 1L << 17, destroy_window, fractal);
 	mlx_mouse_hook(fractal->win->win_ptr, handle_mouse_event, fractal);
 }
