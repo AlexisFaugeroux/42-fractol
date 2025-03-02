@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 21:09:02 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 22:00:01 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	clean_up(t_fractal *fractal)
 		mlx_destroy_display(fractal->win->connection);
 		free(fractal->win);
 	}
+	free(fractal->escaped);
 	free(fractal);
 }
 
@@ -59,6 +60,35 @@ void	init_imgs(t_fractal *fractal)
 			&(fractal->buffer->line_len),
 			&(fractal->buffer->endian)
 			);
+}
+
+void	reset_escaped(t_fractal *fractal)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < HEIGHT)
+	{
+		x = 0;
+		while (x < WIDTH)
+		{
+			fractal->escaped[y * WIDTH + x] = false;
+			x++;
+		}
+		y++;
+	}
+}
+
+void	init_escaped(t_fractal * fractal)
+{
+	fractal->escaped = (bool *)malloc(sizeof(bool) * HEIGHT * WIDTH);
+	if (!fractal->escaped)
+	{
+		clean_up(fractal);
+		exit(EXIT_FAILURE);
+	}
+	reset_escaped(fractal);
 }
 
 t_fractal	*init_fractal()
@@ -102,13 +132,14 @@ t_fractal	*init_fractal()
 	fractal->palette[9] = 0x00FFAA88;
 	fractal->palette[10] = 0x00FFFF99;
 	fractal->palette[11] = 0x00FFFFFF;
-	fractal->max_iter = 56;
+	fractal->max_iter = DEFAULT_MAX_ITER;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
 	fractal->op_count = 0;
 	fractal->zoom = 1;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
+	init_escaped(fractal);
 	return (fractal);
 }
 

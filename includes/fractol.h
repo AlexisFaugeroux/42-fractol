@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 20:59:04 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 21:59:49 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # define GAMMA 2.2
 # define OP_PER_COMPUTE 5
 # define MAX_OP_PER_FRAME 180000000
+# define DEFAULT_MAX_ITER 56
 
 typedef struct s_win
 {
@@ -57,6 +58,7 @@ typedef struct s_fractal
 	struct s_img		*img;
 	struct s_img		*buffer;
 	struct s_complex	pre_computed_c[HEIGHT][WIDTH];
+	bool				*escaped;
 	int					palette[12];
 	int					pre_computed_colors[1024];
 	int					max_iter;
@@ -77,5 +79,7 @@ int		handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
 // compute
 void	pre_compute_c(t_fractal *fractal);
 void	pre_compute_colors(t_fractal *fractal);
+
+void	reset_escaped(t_fractal *fractal);
 
 #endif

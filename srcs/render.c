@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 21:11:47 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 21:45:50 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	get_color(t_fractal *fractal, int x, int y)
 	}
 	if (i == fractal->max_iter)
 		return (BLACK);
+	fractal->escaped[y * WIDTH + x] = true;
 	smooth = smooth_factor(z, i);
 	smooth = log2(1 + smooth) / log2(fractal->max_iter);
 	index = (int)(smooth * 1023);
@@ -74,8 +75,11 @@ void	render(t_fractal *fractal)
 		x = fractal->last_computed_x;
 		while (x < WIDTH)
 		{
-			color = get_color(fractal, x, y);
-			put_pixel_to_image(fractal->img, x, y, color);
+			if (!fractal->escaped[y * WIDTH + x])
+			{
+				color = get_color(fractal, x, y);
+				put_pixel_to_image(fractal->img, x, y, color);
+			}
 			if (fractal->op_count >= MAX_OP_PER_FRAME)
 			{
 				fractal->last_computed_y = y;
@@ -103,6 +107,8 @@ void	render(t_fractal *fractal)
 		}
 		y++;
 	}
+	if (fractal->max_iter <= 246)
+		fractal->max_iter += 10;
 	/* tmp = fractal->img;
 	fractal->img = fractal->buffer;
 	fractal->buffer = tmp; */
@@ -116,6 +122,4 @@ void	render(t_fractal *fractal)
 	fractal->last_computed_y = 0;
 	fractal->last_computed_x = 0;
 	fractal->op_count = 0;
-	if (fractal->max_iter <= 246)
-		fractal->max_iter += 10;
 }
