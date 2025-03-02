@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/01 23:25:30 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 11:41:32 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define HEIGHT 1080
 # define ESCAPE_KEY 65307
 # define BLACK 0x00000000
+# define GAMMA 2.2
 
 typedef struct s_win
 {

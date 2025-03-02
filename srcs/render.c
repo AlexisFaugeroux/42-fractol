@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 00:43:58 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 12:09:51 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,10 +88,10 @@ int	compute(t_fractal *fractal, int x, int y)
 	t_complex	z;
 	t_complex	c;
 	int			i;
-	/* int			color_1;
-	int			color_2;
+	int			index;
 	double		smooth;
-	double		t; */
+	const double		scale_factor = 1.5;
+	double		t_corrected;
 
 	z.Re = 0;
 	z.Im = 0;
@@ -104,12 +104,13 @@ int	compute(t_fractal *fractal, int x, int y)
 		i++;
 	}
 	if (i == fractal->max_iter)
-		return (0x00000000);
-	/* smooth = smooth_factor(z, i);
-	color_1 = fractal->palette[(int)smooth % 12];
-	color_2 = fractal->palette[((int)smooth + 1) % 12];
-	t = smooth - (int)smooth; */
-	return (fractal->pre_computed_colors[i]);
+		return (BLACK);
+	smooth = smooth_factor(z, i);
+	smooth = log2(1 + smooth) / log2(fractal->max_iter);
+	smooth *= scale_factor;
+	t_corrected = pow(smooth, 1.0 / 2.2);
+	index = (int)(t_corrected * 1023);
+	return (fractal->pre_computed_colors[index]);
 }
 
 void	render(t_fractal *fractal)
