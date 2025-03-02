@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 12:09:51 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 12:37:55 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int	compute(t_fractal *fractal, int x, int y)
 	int			i;
 	int			index;
 	double		smooth;
-	const double		scale_factor = 1.5;
 	double		t_corrected;
 
 	z.Re = 0;
@@ -107,7 +106,6 @@ int	compute(t_fractal *fractal, int x, int y)
 		return (BLACK);
 	smooth = smooth_factor(z, i);
 	smooth = log2(1 + smooth) / log2(fractal->max_iter);
-	smooth *= scale_factor;
 	t_corrected = pow(smooth, 1.0 / 2.2);
 	index = (int)(t_corrected * 1023);
 	return (fractal->pre_computed_colors[index]);
