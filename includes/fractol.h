@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 13:53:55 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 20:59:04 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@
 # define ARROW_DOWN_KEY 65362
 # define BLACK 0x00000000
 # define GAMMA 2.2
+# define OP_PER_COMPUTE 5
+# define MAX_OP_PER_FRAME 180000000
 
 typedef struct s_win
 {
@@ -58,6 +60,9 @@ typedef struct s_fractal
 	int					palette[12];
 	int					pre_computed_colors[1024];
 	int					max_iter;
+	int					last_computed_x;
+	int					last_computed_y;
+	long				op_count;
 	double				zoom;
 	double				offset_x;
 	double				offset_y;
@@ -66,9 +71,9 @@ typedef struct s_fractal
 void	render(t_fractal *fractal);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 // handlers
-int	destroy_window(t_fractal *fractal);
-int	handle_key_pressed(int keycode, t_fractal *fractal);
-int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
+int		destroy_window(t_fractal *fractal);
+int		handle_key_pressed(int keycode, t_fractal *fractal);
+int		handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
 // compute
 void	pre_compute_c(t_fractal *fractal);
 void	pre_compute_colors(t_fractal *fractal);

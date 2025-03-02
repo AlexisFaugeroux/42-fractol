@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 14:20:06 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 21:11:47 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	get_color(t_fractal *fractal, int x, int y)
 	int			i;
 	int			index;
 	double		smooth;
-	double		t_corrected;
 
 	z.Re = 0;
 	z.Im = 0;
@@ -51,14 +50,14 @@ int	get_color(t_fractal *fractal, int x, int y)
 	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
 		compute_next_elem(&z, &c);
+		fractal->op_count += 5;
 		i++;
 	}
 	if (i == fractal->max_iter)
 		return (BLACK);
 	smooth = smooth_factor(z, i);
 	smooth = log2(1 + smooth) / log2(fractal->max_iter);
-	t_corrected = pow(smooth, 1.0 / 2.2);
-	index = (int)(t_corrected * 1023);
+	index = (int)(smooth * 1023);
 	return (fractal->pre_computed_colors[index]);
 }
 
@@ -67,23 +66,46 @@ void	render(t_fractal *fractal)
 	int		x;
 	int		y;
 	int		color;
-	t_img	*tmp;
+	/* t_img	*tmp; */
 
-	y = 0;
+	y = fractal->last_computed_y;
 	while (y < HEIGHT)
 	{
-		x = 0;
+		x = fractal->last_computed_x;
 		while (x < WIDTH)
 		{
 			color = get_color(fractal, x, y);
-			put_pixel_to_image(fractal->buffer, x, y, color);
+			put_pixel_to_image(fractal->img, x, y, color);
+			if (fractal->op_count >= MAX_OP_PER_FRAME)
+			{
+				fractal->last_computed_y = y;
+				fractal->last_computed_x = x + 1;
+				if (fractal->last_computed_x >= WIDTH)
+				{
+					fractal->last_computed_y++;
+					fractal->last_computed_x = 0;
+				}
+				/* tmp = fractal->img;
+				fractal->img = fractal->buffer;
+				fractal->buffer = tmp; */
+				mlx_put_image_to_window(
+					fractal->win->connection,
+					fractal->win->win_ptr,
+					fractal->img->img_ptr,
+					0,
+					0
+					);
+				fractal->op_count = 0;
+				return ;
+			}
+			fractal->last_computed_x = 0;
 			x++;
 		}
 		y++;
 	}
-	tmp = fractal->img;
+	/* tmp = fractal->img;
 	fractal->img = fractal->buffer;
-	fractal->buffer = tmp;
+	fractal->buffer = tmp; */
 	mlx_put_image_to_window(
 		fractal->win->connection,
 		fractal->win->win_ptr,
@@ -91,4 +113,9 @@ void	render(t_fractal *fractal)
 		0,
 		0
 		);
+	fractal->last_computed_y = 0;
+	fractal->last_computed_x = 0;
+	fractal->op_count = 0;
+	if (fractal->max_iter <= 246)
+		fractal->max_iter += 10;
 }

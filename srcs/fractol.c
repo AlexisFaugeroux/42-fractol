@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 13:42:53 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/02 21:09:02 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,10 @@ t_fractal	*init_fractal()
 	fractal->palette[9] = 0x00FFAA88;
 	fractal->palette[10] = 0x00FFFF99;
 	fractal->palette[11] = 0x00FFFFFF;
-	fractal->max_iter = 256;
+	fractal->max_iter = 56;
+	fractal->last_computed_x = 0;
+	fractal->last_computed_y = 0;
+	fractal->op_count = 0;
 	fractal->zoom = 1;
 	fractal->offset_x = 0;
 	fractal->offset_y = 0;
