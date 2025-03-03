@@ -6,13 +6,14 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/02 21:45:50 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/03 20:39:57 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/render.h"
+#include "../includes/utils.h"
 
-void	compute_next_elem(t_complex *z, t_complex *c)
+static void	compute_next_elem(t_complex *z, t_complex *c)
 {
 	t_complex	tmp;
 
@@ -22,19 +23,7 @@ void	compute_next_elem(t_complex *z, t_complex *c)
 	z->Im = ((2 * tmp.Re * tmp.Im) + c->Im);
 }
 
-double	smooth_factor(t_complex z, int iteration)
-{
-	double	log_zn;
-	double	nu;
-	double	smooth;
-	
-	log_zn = log(z.Re * z.Re + z.Im * z.Im) / 2;
-	nu = log(log_zn / log(2)) / log(2);
-	smooth = iteration + 1 - nu;
-	return (smooth);
-}
-
-int	get_color(t_fractal *fractal, int x, int y)
+static int	compute_color(t_fractal *fractal, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
@@ -50,7 +39,7 @@ int	get_color(t_fractal *fractal, int x, int y)
 	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
 		compute_next_elem(&z, &c);
-		fractal->op_count += 5;
+		fractal->op_count += OP_PER_COMPUTE;
 		i++;
 	}
 	if (i == fractal->max_iter)
@@ -62,64 +51,55 @@ int	get_color(t_fractal *fractal, int x, int y)
 	return (fractal->pre_computed_colors[index]);
 }
 
+static void	stop_calc_and_render(t_fractal * fractal, int x, int y)
+{
+	fractal->last_computed_y = y;
+	fractal->last_computed_x = x;
+	/* if (fractal->last_computed_x >= WIDTH)
+	{
+		fractal->last_computed_y++;
+		fractal->last_computed_x = 0;
+	} */
+	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
+			fractal->img->img_ptr, 0, 0);
+	fractal->op_count = 0;
+}
+
+static void	put_image(t_fractal *fractal)
+{
+	if (fractal->max_iter <= 206)
+		fractal->max_iter += 50;
+	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
+		fractal->img->img_ptr, 0, 0);
+	fractal->last_computed_y = 0;
+	fractal->last_computed_x = 0;
+	fractal->op_count = 0;
+}
+
 void	render(t_fractal *fractal)
 {
 	int		x;
 	int		y;
 	int		color;
-	/* t_img	*tmp; */
 
-	y = fractal->last_computed_y;
-	while (y < HEIGHT)
+	y = fractal->last_computed_y - 1;
+	while (++y < HEIGHT)
 	{
-		x = fractal->last_computed_x;
-		while (x < WIDTH)
+		x = fractal->last_computed_x - 1;
+		while (++x < WIDTH)
 		{
 			if (!fractal->escaped[y * WIDTH + x])
 			{
-				color = get_color(fractal, x, y);
+				color = compute_color(fractal, x, y);
 				put_pixel_to_image(fractal->img, x, y, color);
 			}
 			if (fractal->op_count >= MAX_OP_PER_FRAME)
 			{
-				fractal->last_computed_y = y;
-				fractal->last_computed_x = x + 1;
-				if (fractal->last_computed_x >= WIDTH)
-				{
-					fractal->last_computed_y++;
-					fractal->last_computed_x = 0;
-				}
-				/* tmp = fractal->img;
-				fractal->img = fractal->buffer;
-				fractal->buffer = tmp; */
-				mlx_put_image_to_window(
-					fractal->win->connection,
-					fractal->win->win_ptr,
-					fractal->img->img_ptr,
-					0,
-					0
-					);
-				fractal->op_count = 0;
+				stop_calc_and_render(fractal, x, y);
 				return ;
 			}
 			fractal->last_computed_x = 0;
-			x++;
 		}
-		y++;
 	}
-	if (fractal->max_iter <= 246)
-		fractal->max_iter += 10;
-	/* tmp = fractal->img;
-	fractal->img = fractal->buffer;
-	fractal->buffer = tmp; */
-	mlx_put_image_to_window(
-		fractal->win->connection,
-		fractal->win->win_ptr,
-		fractal->img->img_ptr,
-		0,
-		0
-		);
-	fractal->last_computed_y = 0;
-	fractal->last_computed_x = 0;
-	fractal->op_count = 0;
+	put_image(fractal);
 }

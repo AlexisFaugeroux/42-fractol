@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/01 22:01:51 by alexis           ###   ########.fr        #
+#    Updated: 2025/03/03 20:14:38 by alexis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,9 +40,15 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 #Sources
 SRCS_DIR		= srcs/
 SRCS_FILES		= fractol.c \
-					pre_compute.c \
-					render.c \
-					handlers/handlers.c
+				  init/init_fractal.c \
+				  init/init_hooks.c \
+				  pre_compute.c \
+				  render/render.c \
+				  render/helpers/render_helpers.c \
+				  handlers/destroy_window.c \
+				  handlers/handlers.c \
+				  utils/colors.c \
+				  utils/utils.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 #Objects
