@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/03 20:39:57 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:52:48 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 
 	z.Re = 0;
 	z.Im = 0;
-	c.Re = fractal->pre_computed_c[y][x].Re * fractal->zoom + fractal->offset_x;
-	c.Im = fractal->pre_computed_c[y][x].Im * fractal->zoom + fractal->offset_y;
+	c.Re = fractal->pre_computed_c[y][x].Re;
+	c.Im = fractal->pre_computed_c[y][x].Im;
 	i = 0;
 	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
 	{
@@ -51,7 +51,7 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 	return (fractal->pre_computed_colors[index]);
 }
 
-static void	stop_calc_and_render(t_fractal * fractal, int x, int y)
+static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
 {
 	fractal->last_computed_y = y;
 	fractal->last_computed_x = x;
@@ -67,14 +67,14 @@ static void	stop_calc_and_render(t_fractal * fractal, int x, int y)
 
 static void	put_image(t_fractal *fractal)
 {
-	if (fractal->max_iter <= 206)
-		fractal->max_iter += 50;
 	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
-		fractal->img->img_ptr, 0, 0);
+			fractal->img->img_ptr, 0, 0);
 	fractal->last_computed_y = 0;
 	fractal->last_computed_x = 0;
 	fractal->op_count = 0;
-}
+	if (fractal->max_iter <= 206)
+		fractal->max_iter += 10;
+};
 
 void	render(t_fractal *fractal)
 {
@@ -82,11 +82,11 @@ void	render(t_fractal *fractal)
 	int		y;
 	int		color;
 
-	y = fractal->last_computed_y - 1;
-	while (++y < HEIGHT)
+	y = fractal->last_computed_y;
+	while (y < HEIGHT)
 	{
-		x = fractal->last_computed_x - 1;
-		while (++x < WIDTH)
+		x = (y == fractal->last_computed_y) ? fractal->last_computed_x : 0;
+		while (x < WIDTH)
 		{
 			if (!fractal->escaped[y * WIDTH + x])
 			{
@@ -98,8 +98,10 @@ void	render(t_fractal *fractal)
 				stop_calc_and_render(fractal, x, y);
 				return ;
 			}
-			fractal->last_computed_x = 0;
+			x++;
 		}
+		fractal->last_computed_x = 0;
+		y++;
 	}
 	put_image(fractal);
 }

@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/03 11:58:53 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/03 22:07:14 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,5 @@ void	clean_and_exit_failure(t_fractal *fractal)
 
 void	reset_escaped(t_fractal *fractal)
 {
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < HEIGHT)
-	{
-		x = 0;
-		while (x < WIDTH)
-		{
-			fractal->escaped[y * WIDTH + x] = false;
-			x++;
-		}
-		y++;
-	}
+	ft_memset(fractal->escaped, false, WIDTH * HEIGHT * sizeof(bool));
 }

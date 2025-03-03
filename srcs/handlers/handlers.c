@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/03 17:43:55 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:52:35 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@ void	reset_params(t_fractal *fractal)
 {
 	reset_escaped(fractal);
 	fractal->max_iter = DEFAULT_MAX_ITER;
+	fractal->last_computed_x = 0;
+	fractal->last_computed_y = 0;
+	fractal->op_count = 0;
 }
 
 
@@ -51,6 +54,7 @@ void	handle_arrows(int keycode, t_fractal *fractal)
 		reset_params(fractal);
 		fractal->offset_y -= 0.1 * fractal->zoom;
 	}
+	pre_compute_c(fractal);
 }
 
 int	handle_key_pressed(int keycode, t_fractal *fractal)
@@ -68,15 +72,14 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 	(void)y;
 	if (keycode == 4)
 	{
-		reset_escaped(fractal);
-		fractal->max_iter = DEFAULT_MAX_ITER;
+		reset_params(fractal);
 		fractal->zoom *= 1.1;
 	}
 	else if (keycode == 5)
 	{
-		reset_escaped(fractal);
-		fractal->max_iter = DEFAULT_MAX_ITER;
+		reset_params(fractal);
 		fractal->zoom *= 0.9;
 	}
+	pre_compute_c(fractal);
 	return (0);
 }

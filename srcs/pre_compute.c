@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/02 14:40:33 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 10:58:26 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,11 @@ void	pre_compute_c(t_fractal *fractal)
 		while (x < WIDTH)
 		{
 			fractal->pre_computed_c[y][x].Re = interpolate(x, 0, WIDTH, -2, 2);
+			fractal->pre_computed_c[y][x].Re *= fractal->zoom;
+			fractal->pre_computed_c[y][x].Re += fractal->offset_x;
 			fractal->pre_computed_c[y][x].Im = interpolate(y, 0, HEIGHT, -2, 2);
+			fractal->pre_computed_c[y][x].Im *= fractal->zoom;
+			fractal->pre_computed_c[y][x].Im += fractal->offset_y;
 			x++;
 		}
 		y++;
