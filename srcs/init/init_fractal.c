@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 18:01:48 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 18:07:08 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,6 @@ void	init_imgs(t_fractal *fractal)
 			&(fractal->img->line_len),
 			&(fractal->img->endian)
 			);
-	/* fractal->buffer->img_ptr = mlx_new_image(fractal->win->connection, WIDTH, HEIGHT);
-	fractal->buffer->pixels = mlx_get_data_addr(
-			fractal->buffer->img_ptr,
-			&(fractal->buffer->bpp),
-			&(fractal->buffer->line_len),
-			&(fractal->buffer->endian)
-			); */
 }
 
 void	init_win(t_fractal *fractal)
@@ -81,9 +74,9 @@ t_fractal	*init_fractal()
 	init_win(fractal);
 	init_imgs(fractal);
 	init_palette(fractal);
-	pre_compute_colors(fractal);
 	init_escaped(fractal);
 	init_params(fractal);
+	pre_compute_colors(fractal);
 	pre_compute_c(fractal);
 	return (fractal);
 }
