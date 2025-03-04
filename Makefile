@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/03 20:14:38 by alexis           ###   ########.fr        #
+#    Updated: 2025/03/04 17:24:40 by alexis           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ WHITE    		= "\033[37m"    # White
 # Compiler
 NAME			= fractol
 CC				= cc
-CFLAGS			= -Wall -Wextra -Werror
+CFLAGS			= -Wall -Wextra -Werror -O2
 
 #Libraries
 LIBFT_DIR		= libft
@@ -40,9 +40,9 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 #Sources
 SRCS_DIR		= srcs/
 SRCS_FILES		= fractol.c \
+				  compute/compute.c \
 				  init/init_fractal.c \
 				  init/init_hooks.c \
-				  pre_compute.c \
 				  render/render.c \
 				  render/helpers/render_helpers.c \
 				  handlers/destroy_window.c \

@@ -6,10 +6,11 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/03 20:11:51 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 17:04:33 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
 void	init_params(t_fractal *fractal)

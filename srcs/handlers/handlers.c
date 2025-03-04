@@ -6,11 +6,12 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 10:52:35 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 17:16:08 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/handlers.h"
+#include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
 void	reset_params(t_fractal *fractal)

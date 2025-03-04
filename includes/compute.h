@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handlers.h                                         :+:      :+:    :+:   */
+/*   compute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:48:47 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 17:44:52 by alexis           ###   ########.fr       */
+/*   Created: 2025/03/04 15:27:14 by alexis            #+#    #+#             */
+/*   Updated: 2025/03/04 17:03:58 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HANDLERS_H
-# define HANDLERS_H
+#ifndef COMPUTE_H
+# define COMPUTE_H
 
-# define ESCAPE_KEY 65307
-# define ARROW_LEFT_KEY 65361
-# define ARROW_RIGHT_KEY 65363
-# define ARROW_UP_KEY 65364
-# define ARROW_DOWN_KEY 65362
+#include "fractol.h"
 
-# include "fractol.h"
+typedef struct s_scale
+{
+	double	scaled_step_x;
+	double	scaled_step_y;
+	double	start_x;
+	double	start_y;
+}				t_scale;
 
-int		destroy_window(t_fractal *fractal);
-int		handle_key_pressed(int keycode, t_fractal *fractal);
-int		handle_mouse_event(int keycode, int x, int y, t_fractal *fractal);
+void	pre_compute_c(t_fractal *fractal);
+void	pre_compute_colors(t_fractal *fractal);
 
 #endif

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pre_compute.c                                      :+:      :+:    :+:   */
+/*   compute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 10:58:26 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 17:23:52 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fractol.h"
+#include "../includes/compute.h"
+#include "../includes/utils.h"
 
-static double	interpolate(double x, double x0, double x1, double y0, double y1)
+/* static double	interpolate(double x, double x0, double x1, double y0, double y1)
 {
 	if (x1 == x0)
 		return (0);
 	return (y0 + (x - x0) * ((y1 - y0) / (x1 - x0)));
-}
+} */
 
 static int	interpolate_color(double t, int color_1, int color_2)
 {
@@ -32,27 +33,56 @@ static int	interpolate_color(double t, int color_1, int color_2)
 	return (r << 16 | g << 8 | b);
 }
 
+/*
+ * 	Compute params needed to get coordinates of a pixel,
+ * 	from [0, WIDTH] scale to the mandlebrot scale.
+ *	4.0 / (double)WIDTH --> get the equivalent of a step between two pixels
+ *	in the [0, WIDTH] scale to the [-2, 2] mandlebrot scale,
+ *	then adjust to the zoom factor.
+ *	scale->start_x --> get the position of the first pixel in the mandlebrot scale
+ */
+t_scale	*new_scale(t_fractal *fractal)
+{
+	t_scale	*scale;
+
+	scale = (t_scale *)malloc(sizeof(t_scale));
+	if (!scale)
+		clean_and_exit_failure(fractal);
+	scale->scaled_step_x = 4.0 / (double)WIDTH * fractal->zoom;
+	scale->scaled_step_y = 4.0 / (double)HEIGHT * fractal->zoom;
+	scale->start_x = -2.0 * fractal->zoom + fractal->offset_x;
+	scale->start_y = -2.0 * fractal->zoom + fractal->offset_y;
+	return (scale);
+}
+
+/*
+ *	For each pixel, get its value in the mandlebrot scale
+ *	scale->start_y + scale->scaled_step_y * y
+ *	--> get position of current pixel in mandlebrot scale
+ */
 void	pre_compute_c(t_fractal *fractal)
 {
 	int			x;
 	int			y;
+	double		Im;
+	t_scale		*scale;
 
+	scale = new_scale(fractal);
 	y = 0;
 	while (y < HEIGHT)
 	{
+		Im = scale->start_y + scale->scaled_step_y * y;
 		x = 0;
 		while (x < WIDTH)
 		{
-			fractal->pre_computed_c[y][x].Re = interpolate(x, 0, WIDTH, -2, 2);
-			fractal->pre_computed_c[y][x].Re *= fractal->zoom;
-			fractal->pre_computed_c[y][x].Re += fractal->offset_x;
-			fractal->pre_computed_c[y][x].Im = interpolate(y, 0, HEIGHT, -2, 2);
-			fractal->pre_computed_c[y][x].Im *= fractal->zoom;
-			fractal->pre_computed_c[y][x].Im += fractal->offset_y;
+			fractal->pre_computed_c[y * WIDTH + x].Re = scale->start_x
+					+ scale->scaled_step_x * x;
+			fractal->pre_computed_c[y * WIDTH + x].Im = Im;
 			x++;
 		}
 		y++;
 	}
+	free(scale);
 }
 
 void	pre_compute_colors(t_fractal *fractal)
