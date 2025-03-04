@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 17:04:33 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/04 18:01:48 by alexis           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,8 @@ t_fractal	*init_fractal()
 	init_imgs(fractal);
 	init_palette(fractal);
 	pre_compute_colors(fractal);
-	pre_compute_c(fractal);
 	init_escaped(fractal);
 	init_params(fractal);
+	pre_compute_c(fractal);
 	return (fractal);
 }
