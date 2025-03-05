@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/04 17:24:40 by alexis           ###   ########.fr        #
+#    Updated: 2025/03/04 21:59:18 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,10 +25,11 @@ WHITE    		= "\033[37m"    # White
 NAME			= fractol
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -O2
+OS				= $(shell uname)
 
 #Libraries
 LIBFT_DIR		= libft
-LIBFT			= $(LIBFT_DIR)/libft.a
+LIBFT				= $(LIBFT_DIR)/libft.a
 LINKER			= -L$(LIBFT_DIR) -lft
 
 #Includes
@@ -56,10 +57,17 @@ OBJS_DIR		= objs/
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR), $(OBJS_FILES))
 
-MLX_DIR			= mlx_linux
-MLX				= $(MLX_DIR)/libmlx.a
-LINKER			+= -lmlx -lm -lz -lXext -lX11 -L$(MLX_DIR)
-INCLUDES_FLAGS	+= -I$(MLX_DIR)
+ifeq ($(OS), Linux)
+	MLX_DIR			= mlx_linux
+	MLX				= $(MLX_DIR)/libmlx.a
+	LINKER			+= -lmlx -lm -lz -lXext -lX11 -L$(MLX_DIR)
+	INCLUDES_FLAGS	+= -I$(MLX_DIR)
+else
+	MLX_DIR			= mlx_mac
+	MLX				= $(MLX_DIR)/libmlx.a
+	LINKER			+= -lmlx -lm -framework OpenGl -framework Appkit -L $(MLX_DIR)
+	INCLUDES_FLAG	+= -I$(MLX_DIR)
+endif
 
 all: $(LIBFT) $(OBJS_DIR) ${NAME}
 

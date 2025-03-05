@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/04 17:03:53 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/05 11:38:36 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define FRACTOL_H
 
 # include "../libft/libft.h"
-# include "../mlx_linux/mlx.h"
+# include "../mlx_mac/mlx.h"
 # include <stdio.h>
 # include <math.h>
 
-# define WIDTH 1920
-# define HEIGHT 1080
+# define WIDTH 900
+# define HEIGHT 580
 # define BLACK 0x00000000
 # define GAMMA 2.2
 # define DEFAULT_MAX_ITER 56
