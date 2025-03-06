@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 16:30:16 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:41:00 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,3 @@ int	main(void)
 	clean_up(fractal);
 	return (0);
 }
-
-// refacto render
-// nb iterations en fonction du zoom

@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 16:06:44 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:47:33 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_fractal
 	struct s_complex	pre_computed_c[HEIGHT * WIDTH];
 	bool				*escaped;
 	int					palette[12];
-	int					pre_computed_colors[1024];
+	int					pre_computed_colors[256];
 	int					max_iter;
 	int					last_computed_x;
 	int					last_computed_y;

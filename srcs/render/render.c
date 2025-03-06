@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 16:36:36 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 17:40:25 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 	fractal->escaped[y * WIDTH + x] = true;
 	smooth = smooth_factor(z, i);
 	smooth = log2(1 + smooth) / log2(fractal->max_iter);
-	index = (int)(smooth * 1023);
+	index = (int)(smooth * 255);
 	return (fractal->pre_computed_colors[index]);
 }
 
@@ -62,14 +62,17 @@ static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
 
 static void	put_image(t_fractal *fractal)
 {
+	int	scaled_iter;
+
 	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
 		fractal->img->img_ptr, 0, 0);
 	fractal->last_computed_y = 0;
 	fractal->last_computed_x = 0;
 	fractal->op_count = 0;
 	reset_escaped(fractal);
-	if (fractal->max_iter <= 206)
-		fractal->max_iter += 10;
+	scaled_iter = (int)(INCR_ITER / fractal->zoom) / 10;
+	if (fractal->max_iter <= 206 + scaled_iter)
+		fractal->max_iter += 10 + scaled_iter;
 }
 
 void	render(t_fractal *fractal)

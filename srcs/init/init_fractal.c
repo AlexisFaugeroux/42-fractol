@@ -6,14 +6,14 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 14:20:37 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:55:13 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
-void	init_params(t_fractal *fractal)
+static void	init_params(t_fractal *fractal)
 {
 	fractal->max_iter = DEFAULT_MAX_ITER;
 	fractal->last_computed_x = 0;
@@ -24,7 +24,7 @@ void	init_params(t_fractal *fractal)
 	fractal->offset_y = 0;
 }
 
-void	init_escaped(t_fractal *fractal)
+static void	init_escaped(t_fractal *fractal)
 {
 	fractal->escaped = (bool *)malloc(sizeof(bool) * HEIGHT * WIDTH);
 	if (!fractal->escaped)
@@ -32,7 +32,7 @@ void	init_escaped(t_fractal *fractal)
 	reset_escaped(fractal);
 }
 
-void	init_imgs(t_fractal *fractal)
+static void	init_img(t_fractal *fractal)
 {
 	fractal->img = (t_img *)malloc(sizeof(t_img));
 	fractal->buffer = (t_img *)malloc(sizeof(t_img));
@@ -51,7 +51,7 @@ void	init_imgs(t_fractal *fractal)
 			);
 }
 
-void	init_win(t_fractal *fractal)
+static void	init_win(t_fractal *fractal)
 {
 	fractal->win = (t_win *)malloc(sizeof(t_win));
 	if (!fractal->win)
@@ -73,7 +73,7 @@ t_fractal	*init_fractal(void)
 	if (!fractal)
 		exit(EXIT_FAILURE);
 	init_win(fractal);
-	init_imgs(fractal);
+	init_img(fractal);
 	init_palette(fractal);
 	init_escaped(fractal);
 	init_params(fractal);

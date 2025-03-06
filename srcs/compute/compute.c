@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 16:42:33 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:47:02 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,9 @@ void	pre_compute_colors(t_fractal *fractal)
 	double	t_corrected;
 
 	i = 0;
-	while (i < 1024)
+	while (i < 256)
 	{
-		t = (double)i / 1023;
+		t = (double)i / 255;
 		scaled = t * (12 - 1);
 		index_low = (int)scaled;
 		t_corrected = scaled - index_low;
