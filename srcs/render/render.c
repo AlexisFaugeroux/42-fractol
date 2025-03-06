@@ -6,21 +6,21 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/04 17:57:17 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/06 14:23:27 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/render.h"
-#include "../includes/utils.h"
+#include "../../includes/render.h"
+#include "../../includes/utils.h"
 
 static void	compute_next_elem(t_complex *z, t_complex *c)
 {
 	t_complex	tmp;
 
-	tmp.Re = z->Re;
-	tmp.Im = z->Im;
-	z->Re = ((z->Re * z->Re) - (z->Im * z->Im) + c->Re);
-	z->Im = ((2 * tmp.Re * tmp.Im) + c->Im);
+	tmp.re = z->re;
+	tmp.im = z->im;
+	z->re = ((z->re * z->re) - (z->im * z->im) + c->re);
+	z->im = ((2 * tmp.re * tmp.im) + c->im);
 }
 
 static int	compute_color(t_fractal *fractal, int x, int y)
@@ -31,12 +31,12 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 	int			index;
 	double		smooth;
 
-	z.Re = 0;
-	z.Im = 0;
-	c.Re = fractal->pre_computed_c[y * WIDTH + x].Re;
-	c.Im = fractal->pre_computed_c[y * WIDTH + x].Im;
+	z.re = 0;
+	z.im = 0;
+	c.re = fractal->pre_computed_c[y * WIDTH + x].re;
+	c.im = fractal->pre_computed_c[y * WIDTH + x].im;
 	i = 0;
-	while (i < fractal->max_iter && ((z.Re * z.Re) + (z.Im * z.Im)) <= 4)
+	while (i < fractal->max_iter && ((z.re * z.re) + (z.im * z.im)) <= 4)
 	{
 		compute_next_elem(&z, &c);
 		fractal->op_count += OP_PER_COMPUTE;
@@ -55,27 +55,22 @@ static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
 {
 	fractal->last_computed_y = y;
 	fractal->last_computed_x = x;
-	/* if (fractal->last_computed_x >= WIDTH)
-	{
-		fractal->last_computed_y++;
-		fractal->last_computed_x = 0;
-	} */
 	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
-			fractal->img->img_ptr, 0, 0);
+		fractal->img->img_ptr, 0, 0);
 	fractal->op_count = 0;
 }
 
 static void	put_image(t_fractal *fractal)
 {
 	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
-			fractal->img->img_ptr, 0, 0);
+		fractal->img->img_ptr, 0, 0);
 	fractal->last_computed_y = 0;
 	fractal->last_computed_x = 0;
 	fractal->op_count = 0;
 	reset_escaped(fractal);
 	if (fractal->max_iter <= 206)
 		fractal->max_iter += 10;
-};
+}
 
 void	render(t_fractal *fractal)
 {

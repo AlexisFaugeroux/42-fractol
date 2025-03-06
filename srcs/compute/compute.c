@@ -6,12 +6,12 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/04 17:23:52 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/06 14:20:01 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/compute.h"
-#include "../includes/utils.h"
+#include "../../includes/compute.h"
+#include "../../includes/utils.h"
 
 /* static double	interpolate(double x, double x0, double x1, double y0, double y1)
 {
@@ -25,11 +25,10 @@ static int	interpolate_color(double t, int color_1, int color_2)
 	int	r;
 	int	g;
 	int	b;
- 
+
 	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
 	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
 	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
-
 	return (r << 16 | g << 8 | b);
 }
 
@@ -64,20 +63,20 @@ void	pre_compute_c(t_fractal *fractal)
 {
 	int			x;
 	int			y;
-	double		Im;
+	double		im;
 	t_scale		*scale;
 
 	scale = new_scale(fractal);
 	y = 0;
 	while (y < HEIGHT)
 	{
-		Im = scale->start_y + scale->scaled_step_y * y;
+		im = scale->start_y + scale->scaled_step_y * y;
 		x = 0;
 		while (x < WIDTH)
 		{
-			fractal->pre_computed_c[y * WIDTH + x].Re = scale->start_x
-					+ scale->scaled_step_x * x;
-			fractal->pre_computed_c[y * WIDTH + x].Im = Im;
+			fractal->pre_computed_c[y * WIDTH + x].re = scale->start_x
+				+ scale->scaled_step_x * x;
+			fractal->pre_computed_c[y * WIDTH + x].im = im;
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/04 18:12:13 by alexis           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:30:16 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ int	main(void)
 
 // refacto render
 // nb iterations en fonction du zoom
-// gérer le zoom en fonction de la souris
