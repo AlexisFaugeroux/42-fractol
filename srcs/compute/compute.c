@@ -6,19 +6,12 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 14:20:01 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:42:33 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
-
-/* static double	interpolate(double x, double x0, double x1, double y0, double y1)
-{
-	if (x1 == x0)
-		return (0);
-	return (y0 + (x - x0) * ((y1 - y0) / (x1 - x0)));
-} */
 
 static int	interpolate_color(double t, int color_1, int color_2)
 {
@@ -40,7 +33,7 @@ static int	interpolate_color(double t, int color_1, int color_2)
  *	then adjust to the zoom factor.
  *	scale->start_x --> get the position of the first pixel in the mandlebrot scale
  */
-t_scale	*new_scale(t_fractal *fractal)
+static t_scale	*new_scale(t_fractal *fractal)
 {
 	t_scale	*scale;
 
@@ -86,8 +79,6 @@ void	pre_compute_c(t_fractal *fractal)
 
 void	pre_compute_colors(t_fractal *fractal)
 {
-	int		color_1;
-	int		color_2;
 	int		i;
 	int		index_low;
 	double	scaled;
@@ -101,9 +92,10 @@ void	pre_compute_colors(t_fractal *fractal)
 		scaled = t * (12 - 1);
 		index_low = (int)scaled;
 		t_corrected = scaled - index_low;
-		color_1 = fractal->palette[index_low];
-		color_2 = fractal->palette[index_low + 1];
-		fractal->pre_computed_colors[i] = interpolate_color(t_corrected, color_1, color_2);
+		fractal->pre_computed_colors[i] = interpolate_color(
+				t_corrected,
+				fractal->palette[index_low],
+				fractal->palette[index_low + 1]);
 		i++;
 	}
 }

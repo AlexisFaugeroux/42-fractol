@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 14:23:27 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 16:36:36 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,7 @@ void	render(t_fractal *fractal)
 	y = fractal->last_computed_y - 1;
 	while (++y < HEIGHT)
 	{
-		if (y == fractal->last_computed_y)
-			x = fractal->last_computed_x - 1;
-		else
-			x = -1;
+		x = fractal->last_computed_x - 1;
 		while (++x < WIDTH)
 		{
 			if (!fractal->escaped[y * WIDTH + x])
