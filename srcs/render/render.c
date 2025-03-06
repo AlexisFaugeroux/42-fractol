@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 17:40:25 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/06 18:03:49 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,35 @@ static void	compute_next_elem(t_complex *z, t_complex *c)
 	z->im = ((2 * tmp.re * tmp.im) + c->im);
 }
 
+static void	init_complex(t_fractal *fractal, t_complex *z,
+			t_complex *c, int pixel_pos)
+{
+	z->re = 0;
+	z->im = 0;
+	c->re = fractal->pre_computed_c[pixel_pos].re;
+	c->im = fractal->pre_computed_c[pixel_pos].im;
+}
+
+static int	get_color_index(t_fractal *fractal, t_complex z,
+			int pixel_pos, int index)
+{
+	double		smooth;
+
+	fractal->escaped[pixel_pos] = true;
+	smooth = smooth_factor(z, index);
+	smooth = log2(1 + smooth) / log2(fractal->max_iter);
+	index = (int)(smooth * 255);
+	return (index);
+}
+
 static int	compute_color(t_fractal *fractal, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
 	int			index;
-	double		smooth;
 
-	z.re = 0;
-	z.im = 0;
-	c.re = fractal->pre_computed_c[y * WIDTH + x].re;
-	c.im = fractal->pre_computed_c[y * WIDTH + x].im;
+	init_complex(fractal, &z, &c, y * WIDTH + x);
 	i = 0;
 	while (i < fractal->max_iter && ((z.re * z.re) + (z.im * z.im)) <= 4)
 	{
@@ -44,11 +61,10 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 	}
 	if (i == fractal->max_iter)
 		return (BLACK);
-	fractal->escaped[y * WIDTH + x] = true;
-	smooth = smooth_factor(z, i);
-	smooth = log2(1 + smooth) / log2(fractal->max_iter);
-	index = (int)(smooth * 255);
-	return (fractal->pre_computed_colors[index]);
+	index = get_color_index(fractal, z, y * WIDTH + x, i);
+	if (index >= 0)
+		return (fractal->pre_computed_colors[index]);
+	return (fractal->pre_computed_colors[0]);
 }
 
 static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
