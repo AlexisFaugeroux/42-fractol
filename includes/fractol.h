@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 17:33:57 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 18:07:26 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define HEIGHT 900
 # define BLACK 0x00000000
 # define GAMMA 2.2
-# define DEFAULT_MAX_ITER 56
+# define DEFAULT_MAX_ITER 100
 
 # define PALETTE_SIZE 12
 # define COLORS_SIZE 256

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 10:30:43 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 17:17:44 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:17:36 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ void	init_theme(t_fractal *fractal)
 	if (!fractal->theme)
 		clean_and_exit_failure(fractal);
 	fractal->theme->name = ft_strdup("Theme");
-	set_default(fractal->theme);
+	set_black_white(fractal->theme);
 	compute_colors(fractal->theme);
 }
