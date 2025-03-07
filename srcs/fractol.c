@@ -6,23 +6,13 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 17:41:00 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:34:25 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/init.h"
 #include "../includes/render.h"
 #include "../includes/utils.h"
-
-void	put_pixel_to_image(t_img *img, int x, int y, int color)
-{
-	char	*dst;
-	int		offset;
-
-	offset = (y * img->line_len + x * (img->bpp / 8));
-	dst = img->pixels + offset;
-	*(unsigned int *)dst = (unsigned int)color;
-}
 
 int	main(void)
 {

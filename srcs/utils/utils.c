@@ -6,11 +6,21 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 15:25:59 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:33:20 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fractol.h"
+
+void	put_pixel_to_image(t_img *img, int x, int y, int color)
+{
+	char	*dst;
+	int		offset;
+
+	offset = (y * img->line_len + x * (img->bpp / 8));
+	dst = img->pixels + offset;
+	*(unsigned int *)dst = (unsigned int)color;
+}
 
 void	clean_up(t_fractal *fractal)
 {

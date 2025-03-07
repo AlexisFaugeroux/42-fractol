@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 15:26:37 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:33:57 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,5 @@ typedef struct s_fractal
 	double				offset_x;
 	double				offset_y;
 }				t_fractal;
-
-void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/07 17:29:12 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/07 17:40:54 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,10 @@ SRCS_FILES		= fractol.c \
 				  compute/compute_c.c \
 				  compute/compute_colors.c \
 				  compute/compute_next_elem.c \
-				  init/init_fractal.c \
-				  init/init_hooks.c \
+				  fractal/init_fractal.c \
+				  handlers/destroy_window.c \
+				  handlers/handlers.c \
+				  hooks/init_hooks.c \
 				  render/render.c \
 				  render/render_helpers.c \
 				  theme/init_theme.c \
@@ -53,8 +55,6 @@ SRCS_FILES		= fractol.c \
 				  theme/set_theme_ide.c \
 				  theme/set_theme_others.c \
 				  theme/set_theme_rgb.c \
-				  handlers/destroy_window.c \
-				  handlers/handlers.c \
 				  utils/utils.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
