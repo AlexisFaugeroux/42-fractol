@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 16:47:33 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 10:16:22 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 # define FRACTOL_H
 
 # include "../libft/libft.h"
-# include "../mlx_linux/mlx.h"
+
+#	if defined(__linux__)
+#	 define OS_CODE 1
+#  include "../mlx_linux/mlx.h"
+# elif defined(__APPLE__) && defined(__MACH__)
+#  define OS_CODE 2
+#  include "../mlx_mac/mlx.h"
+# else
+#  define OS_CODE 0
+# endif
+
 # include <stdio.h>
 # include <math.h>
 
