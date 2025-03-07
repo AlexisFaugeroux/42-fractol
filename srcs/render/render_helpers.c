@@ -6,11 +6,11 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:50:47 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 14:24:09 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:28:08 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../includes/fractol.h"
+#include "../../includes/fractol.h"
 
 double	smooth_factor(t_complex z, int iteration)
 {
@@ -22,4 +22,13 @@ double	smooth_factor(t_complex z, int iteration)
 	nu = log(log_zn / log(2)) / log(2);
 	smooth = iteration + 1 - nu;
 	return (smooth);
+}
+
+void	init_complex(t_fractal *fractal, t_complex *z,
+			t_complex *c, int pixel_pos)
+{
+	z->re = 0;
+	z->im = 0;
+	c->re = fractal->computed_c[pixel_pos].re;
+	c->im = fractal->computed_c[pixel_pos].im;
 }

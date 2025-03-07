@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 10:20:15 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 14:51:01 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	handle_arrows(int keycode, t_fractal *fractal)
 		reset_params(fractal);
 		fractal->offset_y -= OFFSET_FACTOR * fractal->zoom;
 	}
-	pre_compute_c(fractal);
+	compute_c(fractal);
 }
 
 int	handle_key_pressed(int keycode, t_fractal *fractal)
@@ -71,8 +71,8 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 	double	scaled_x;
 	double	scaled_y;
 
-	scaled_x = fractal->pre_computed_c[y * WIDTH + x].re;
-	scaled_y = fractal->pre_computed_c[y * WIDTH + x].im;
+	scaled_x = fractal->computed_c[y * WIDTH + x].re;
+	scaled_y = fractal->computed_c[y * WIDTH + x].im;
 	if (keycode == 4)
 	{
 		reset_params(fractal);
@@ -91,6 +91,6 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 			+ (fractal->offset_y - scaled_y) * ZOOM_FACTOR;
 		fractal->zoom *= ZOOM_FACTOR;
 	}
-	pre_compute_c(fractal);
+	compute_c(fractal);
 	return (0);
 }

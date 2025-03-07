@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compute.c                                          :+:      :+:    :+:   */
+/*   compute_c.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 16:47:02 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:23:43 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
-
-static int	interpolate_color(double t, int color_1, int color_2)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (1 - t) * ((color_1 >> 16 & 0xFF)) + t * ((color_2 >> 16) & 0xFF);
-	g = (1 - t) * ((color_1 >> 8 & 0xFF)) + t * ((color_2 >> 8) & 0xFF);
-	b = (1 - t) * (color_1 & 0xFF) + t * (color_2 & 0xFF);
-	return (r << 16 | g << 8 | b);
-}
 
 /*
  * 	Compute params needed to get coordinates of a pixel,
@@ -52,7 +40,7 @@ static t_scale	*new_scale(t_fractal *fractal)
  *	scale->start_y + scale->scaled_step_y * y
  *	--> get position of current pixel in mandlebrot scale
  */
-void	pre_compute_c(t_fractal *fractal)
+void	compute_c(t_fractal *fractal)
 {
 	int			x;
 	int			y;
@@ -67,35 +55,12 @@ void	pre_compute_c(t_fractal *fractal)
 		x = 0;
 		while (x < WIDTH)
 		{
-			fractal->pre_computed_c[y * WIDTH + x].re = scale->start_x
+			fractal->computed_c[y * WIDTH + x].re = scale->start_x
 				+ scale->scaled_step_x * x;
-			fractal->pre_computed_c[y * WIDTH + x].im = im;
+			fractal->computed_c[y * WIDTH + x].im = im;
 			x++;
 		}
 		y++;
 	}
 	free(scale);
-}
-
-void	pre_compute_colors(t_fractal *fractal)
-{
-	int		i;
-	int		index_low;
-	double	scaled;
-	double	t;
-	double	t_corrected;
-
-	i = 0;
-	while (i < 256)
-	{
-		t = (double)i / 255;
-		scaled = t * (12 - 1);
-		index_low = (int)scaled;
-		t_corrected = scaled - index_low;
-		fractal->pre_computed_colors[i] = interpolate_color(
-				t_corrected,
-				fractal->palette[index_low],
-				fractal->palette[index_low + 1]);
-		i++;
-	}
 }

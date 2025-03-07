@@ -6,10 +6,12 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 16:55:13 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 15:57:33 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../../includes/init.h"
+#include "../../includes/theme.h"
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
@@ -74,10 +76,9 @@ t_fractal	*init_fractal(void)
 		exit(EXIT_FAILURE);
 	init_win(fractal);
 	init_img(fractal);
-	init_palette(fractal);
+	init_theme(fractal);
 	init_escaped(fractal);
 	init_params(fractal);
-	pre_compute_colors(fractal);
-	pre_compute_c(fractal);
+	compute_c(fractal);
 	return (fractal);
 }

@@ -6,31 +6,13 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/06 18:03:49 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:28:38 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/render.h"
+#include "../../includes/compute.h"
 #include "../../includes/utils.h"
-
-static void	compute_next_elem(t_complex *z, t_complex *c)
-{
-	t_complex	tmp;
-
-	tmp.re = z->re;
-	tmp.im = z->im;
-	z->re = ((z->re * z->re) - (z->im * z->im) + c->re);
-	z->im = ((2 * tmp.re * tmp.im) + c->im);
-}
-
-static void	init_complex(t_fractal *fractal, t_complex *z,
-			t_complex *c, int pixel_pos)
-{
-	z->re = 0;
-	z->im = 0;
-	c->re = fractal->pre_computed_c[pixel_pos].re;
-	c->im = fractal->pre_computed_c[pixel_pos].im;
-}
 
 static int	get_color_index(t_fractal *fractal, t_complex z,
 			int pixel_pos, int index)
@@ -44,7 +26,7 @@ static int	get_color_index(t_fractal *fractal, t_complex z,
 	return (index);
 }
 
-static int	compute_color(t_fractal *fractal, int x, int y)
+static int	get_color(t_fractal *fractal, int x, int y)
 {
 	t_complex	z;
 	t_complex	c;
@@ -63,8 +45,8 @@ static int	compute_color(t_fractal *fractal, int x, int y)
 		return (BLACK);
 	index = get_color_index(fractal, z, y * WIDTH + x, i);
 	if (index >= 0)
-		return (fractal->pre_computed_colors[index]);
-	return (fractal->pre_computed_colors[0]);
+		return (fractal->theme->colors[index]);
+	return (fractal->theme->colors[0]);
 }
 
 static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
@@ -105,7 +87,7 @@ void	render(t_fractal *fractal)
 		{
 			if (!fractal->escaped[y * WIDTH + x])
 			{
-				color = compute_color(fractal, x, y);
+				color = get_color(fractal, x, y);
 				put_pixel_to_image(fractal->img, x, y, color);
 			}
 			if (fractal->op_count >= MAX_OP_PER_FRAME)

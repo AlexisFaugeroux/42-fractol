@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:50:17 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/06 17:35:01 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/07 17:28:22 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,7 @@
 
 void	render(t_fractal *fractal);
 double	smooth_factor(t_complex z, int iteration);
+void	init_complex(t_fractal *fractal, t_complex *z,
+			t_complex *c, int pixel_pos);
 
 #endif

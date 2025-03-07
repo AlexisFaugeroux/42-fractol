@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   compute_next_elem.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:53:32 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 10:32:57 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/07 17:25:54 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/07 17:26:28 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../includes/fractol.h"
 
-# include "fractol.h"
+void	compute_next_elem(t_complex *z, t_complex *c)
+{
+	t_complex	tmp;
 
-void	clean_and_exit_failure(t_fractal *fractal);
-void	reset_escaped(t_fractal *fractal);
-void	clean_up(t_fractal *fractal);
-
-#endif
+	tmp.re = z->re;
+	tmp.im = z->im;
+	z->re = ((z->re * z->re) - (z->im * z->im) + c->re);
+	z->im = ((2 * tmp.re * tmp.im) + c->im);
+}
