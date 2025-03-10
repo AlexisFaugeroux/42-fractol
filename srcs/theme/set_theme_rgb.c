@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:04:01 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 17:04:49 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:32:00 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,21 @@ void	set_green(t_theme *theme)
 	theme->palette[11] = 0x00e0ff99;
 }
 
+void	set_purple(t_theme *theme)
+{
+	theme->palette[0] = 0x0083a1f3;
+	theme->palette[1] = 0x005c61c5;
+	theme->palette[2] = 0x00443d93;
+	theme->palette[3] = 0x00737ff0;
+	theme->palette[4] = 0x00342c7b;
+	theme->palette[5] = 0x00a7e9fb;
+	theme->palette[6] = 0x008c8af0;
+	theme->palette[7] = 0x00676edf;
+	theme->palette[8] = 0x009fc4fb;
+	theme->palette[9] = 0x005c54ae;
+	theme->palette[10] = 0x001f1153;
+	theme->palette[11] = 0x00649ccc;
+}
 void	set_black_white(t_theme *theme)
 {
 	theme->palette[0] = 0x00000000;

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/08 12:07:51 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/09 18:33:20 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,17 +60,16 @@ static void	stop_calc_and_render(t_fractal *fractal, int x, int y)
 
 static void	put_image(t_fractal *fractal)
 {
-	int	scaled_iter;
+	double	scaled_iter;
 
 	mlx_put_image_to_window(fractal->win->connection, fractal->win->win_ptr,
 		fractal->img->img_ptr, 0, 0);
 	fractal->last_computed_y = 0;
 	fractal->last_computed_x = 0;
 	fractal->op_count = 0;
-	reset_escaped(fractal);
-	scaled_iter = ((int)INCR_ITER / fractal->zoom) / 10000.0;
-	if (fractal->max_iter <= 1000)
-		fractal->max_iter += 100 + scaled_iter;
+	scaled_iter = BASE_ITER * pow(1.0 / fractal->zoom, EXPONENT);
+	if (fractal->max_iter < scaled_iter)
+		fractal->max_iter = (int)(fractal->max_iter * 0.9 + scaled_iter * 0.1);
 }
 
 void	render(t_fractal *fractal)

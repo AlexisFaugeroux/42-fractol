@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_theme.c                                       :+:      :+:    :+:   */
+/*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/07 10:30:43 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/10 17:26:09 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/09 18:12:39 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/09 18:41:47 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/theme.h"
-#include "../../includes/compute.h"
-#include "../../includes/utils.h"
-
-void	init_theme(t_fractal *fractal)
+void	extract_rgb(int color, unsigned char *r, unsigned char *g, unsigned char *b)
 {
-	fractal->theme = (t_theme *)malloc(sizeof(t_theme));
-	if (!fractal->theme)
-		clean_and_exit_failure(fractal);
-	fractal->theme->name = ft_strdup("Theme");
-	fractal->theme->shift = 0;
-	set_default(fractal->theme);
-	compute_colors(fractal->theme);
+	*r = (color >> 16) & 0xFF;
+	*g = (color >> 8) & 0xFF;
+	*b = color & 0xFF;
+}
+
+int	build_color(unsigned char r, unsigned char g, unsigned char b)
+{
+	return ((r << 16) | (g << 8) | b);
 }

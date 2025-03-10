@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 18:07:26 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/09 17:04:36 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_theme
 	char	*name;
 	int		palette[PALETTE_SIZE];
 	int		colors[COLORS_SIZE];
+	int		shift;
 }				t_theme;
 
 typedef struct s_complex

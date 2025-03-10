@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:50:17 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/08 11:14:02 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/10 17:23:14 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 # define RENDER_H
 
 # define OP_PER_COMPUTE 7
-# define MAX_OP_PER_FRAME 10000000
-# define INCR_ITER 1.01
+# define MAX_OP_PER_FRAME 15000000
 
 # define BASE_ITER 100
-# define INCR_FACTOR 100.0
+# define EXPONENT 0.3
 
 # include "fractol.h"
 

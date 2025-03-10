@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:20:29 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/08 12:18:06 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:38:51 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ void	set_space(t_theme *theme);
 void	set_red(t_theme *theme);
 void	set_blue(t_theme *theme);
 void	set_green(t_theme *theme);
+void	set_purple(t_theme *theme);
 void	set_black_white(t_theme *theme);
 
 void	set_cyberpunk(t_theme *theme);
 void	set_psyche(t_theme *theme);
+void	set_autumn(t_theme *theme);
 
 #endif

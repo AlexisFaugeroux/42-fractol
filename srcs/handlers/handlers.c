@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/08 12:10:59 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/10 16:36:54 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 			+ (fractal->offset_y - scaled_y) * ZOOM_FACTOR;
 		fractal->zoom *= ZOOM_FACTOR;
 	}
+	shift_colors(fractal->theme);
 	compute_c(fractal);
 	return (0);
 }

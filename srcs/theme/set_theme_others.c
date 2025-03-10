@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:07:14 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 17:07:40 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/08 12:39:31 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,22 @@ void	set_psyche(t_theme *theme)
 	theme->palette[9] = 0x00ff4500;
 	theme->palette[10] = 0x00ffffa5;
 	theme->palette[11] = 0x00ff00a0;
+}
+
+void	set_autumn(t_theme *theme)
+{
+	theme->palette[0] = 0x002d181d;
+	theme->palette[1] = 0x00503045;
+	theme->palette[2] = 0x00687597;
+	theme->palette[3] = 0x003c5470;
+	theme->palette[4] = 0x008c93a5;
+	theme->palette[5] = 0x00dfabad;
+	theme->palette[6] = 0x00b78b8d;
+	theme->palette[7] = 0x00a06f71;
+	theme->palette[8] = 0x00edd9e3;
+	theme->palette[9] = 0x00d5bfc9;
+	theme->palette[10] = 0x00c0a6b1;
+	theme->palette[11] = 0x00988084;
 }
 
 void	set_cyberpunk(t_theme *theme)

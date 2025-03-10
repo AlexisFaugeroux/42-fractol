@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/07 17:40:54 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/09 18:29:35 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRCS_FILES		= fractol.c \
 				  theme/set_theme_ide.c \
 				  theme/set_theme_others.c \
 				  theme/set_theme_rgb.c \
+				  utils/rgb.c \
 				  utils/utils.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
