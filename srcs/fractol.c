@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/07 17:34:25 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 11:30:38 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,14 @@
 #include "../includes/render.h"
 #include "../includes/utils.h"
 
-int	main(void)
+int	main(int argc, char *argv[])
 {
+	t_args		args;
 	t_fractal	*fractal;
 
-	fractal = init_fractal();
+	init_args(&args);
+	parse(&args, argc, argv);
+	fractal = init_fractal(&args);
 	init_hooks(fractal);
 	mlx_loop_hook(fractal->win->connection, (void *)render, fractal);
 	mlx_loop(fractal->win->connection);

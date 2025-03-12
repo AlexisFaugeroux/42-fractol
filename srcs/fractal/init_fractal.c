@@ -6,17 +6,22 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 15:57:33 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 15:54:20 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/init.h"
 #include "../../includes/theme.h"
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
-static void	init_params(t_fractal *fractal)
+static void	init_params(t_fractal *fractal, t_args *args)
 {
+	fractal->name = ft_strdup(args->name);
+	if (!fractal->name)
+	{
+		clean_args(args);
+		clean_and_exit_failure(fractal);
+	}
 	fractal->max_iter = DEFAULT_MAX_ITER;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
@@ -67,7 +72,7 @@ static void	init_win(t_fractal *fractal)
 		clean_and_exit_failure(fractal);
 }
 
-t_fractal	*init_fractal(void)
+t_fractal	*init_fractal(t_args *args)
 {
 	t_fractal	*fractal;
 
@@ -76,9 +81,10 @@ t_fractal	*init_fractal(void)
 		exit(EXIT_FAILURE);
 	init_win(fractal);
 	init_img(fractal);
-	init_theme(fractal);
+	init_theme(fractal, args);
 	init_escaped(fractal);
-	init_params(fractal);
+	init_params(fractal, args);
 	compute_c(fractal);
+	clean_args(args);
 	return (fractal);
 }

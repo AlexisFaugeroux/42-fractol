@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/09 17:04:36 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:42:46 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define WIDTH 900
 # define HEIGHT 900
 # define BLACK 0x00000000
-# define GAMMA 2.2
 # define DEFAULT_MAX_ITER 100
 
 # define PALETTE_SIZE 12
@@ -58,6 +57,8 @@ typedef struct s_theme
 	int		palette[PALETTE_SIZE];
 	int		colors[COLORS_SIZE];
 	int		shift;
+	int		current;
+	void	(*setters[11])(struct s_theme *theme);
 }				t_theme;
 
 typedef struct s_complex
@@ -68,6 +69,7 @@ typedef struct s_complex
 
 typedef struct s_fractal
 {
+	char				*name;
 	struct s_win		*win;
 	struct s_img		*img;
 	struct s_img		*buffer;

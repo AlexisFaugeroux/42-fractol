@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:47 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 10:20:53 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:58:34 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@
 #  define ARROW_RIGHT_KEY 124
 #  define ARROW_UP_KEY 126
 #  define ARROW_DOWN_KEY 125
+#  define T_KEY 17
 # else
 #  define ESCAPE_KEY 65307
 #  define ARROW_LEFT_KEY 65361
 #  define ARROW_RIGHT_KEY 65363
 #  define ARROW_UP_KEY 65364
 #  define ARROW_DOWN_KEY 65362
+#  define T_KEY 17
 # endif
 
 # define ZOOM_FACTOR 1.1

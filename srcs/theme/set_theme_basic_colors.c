@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_theme_rgb.c                                    :+:      :+:    :+:   */
+/*   set_theme_basic_colors.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:04:01 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/08 12:32:00 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 16:23:35 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	set_red(t_theme *theme)
 {
+	theme->current = 1;
 	theme->palette[0] = 0x00050005;
 	theme->palette[1] = 0x00100008;
 	theme->palette[2] = 0x00200010;
@@ -30,6 +31,7 @@ void	set_red(t_theme *theme)
 
 void	set_blue(t_theme *theme)
 {
+	theme->current = 2;
 	theme->palette[0] = 0x00000510;
 	theme->palette[1] = 0x00000820;
 	theme->palette[2] = 0x00001035;
@@ -44,24 +46,9 @@ void	set_blue(t_theme *theme)
 	theme->palette[11] = 0x0099e0ff;
 }
 
-void	set_green(t_theme *theme)
-{
-	theme->palette[0] = 0x00051000;
-	theme->palette[1] = 0x00082000;
-	theme->palette[2] = 0x00103500;
-	theme->palette[3] = 0x00185000;
-	theme->palette[4] = 0x00257000;
-	theme->palette[5] = 0x00359000;
-	theme->palette[6] = 0x0050b000;
-	theme->palette[7] = 0x0070d000;
-	theme->palette[8] = 0x0090f000;
-	theme->palette[9] = 0x00a5ff55;
-	theme->palette[10] = 0x00c0ff75;
-	theme->palette[11] = 0x00e0ff99;
-}
-
 void	set_purple(t_theme *theme)
 {
+	theme->current = 3;
 	theme->palette[0] = 0x0083a1f3;
 	theme->palette[1] = 0x005c61c5;
 	theme->palette[2] = 0x00443d93;
@@ -77,6 +64,7 @@ void	set_purple(t_theme *theme)
 }
 void	set_black_white(t_theme *theme)
 {
+	theme->current = 4;
 	theme->palette[0] = 0x00000000;
 	theme->palette[1] = 0x00101010;
 	theme->palette[2] = 0x00202020;

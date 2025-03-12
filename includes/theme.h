@@ -6,26 +6,26 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:20:29 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/08 12:38:51 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/11 17:05:03 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef THEME_H
 # define THEME_H
 
-# include "fractol.h"
+# include "parse.h"
 
-void	init_theme(t_fractal *fractal);
+void	init_theme(t_fractal *fractal, t_args *args);
+void	switch_theme(t_fractal *fractal);
 
 void	set_default(t_theme *theme);
 
 void	set_tokyonight(t_theme *theme);
 void	set_dracula(t_theme *theme);
-void	set_catppuccin(t_theme *theme);
 
 void	set_lava(t_theme *theme);
 void	set_ice(t_theme *theme);
-void	set_space(t_theme *theme);
+void	set_sky(t_theme *theme);
 
 void	set_red(t_theme *theme);
 void	set_blue(t_theme *theme);
