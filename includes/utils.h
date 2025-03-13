@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:53:32 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/11 16:52:14 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:26:11 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ void	reset_escaped(t_fractal *fractal);
 void	reset_params(t_fractal *fractal);
 void	clean_up(t_fractal *fractal);
 
-void	extract_rgb(int color, unsigned char *r, unsigned char *g, unsigned char *b);
+void	extract_rgb(int color, unsigned char *r,
+			unsigned char *g, unsigned char *b);
 int		build_color(unsigned char r, unsigned char g, unsigned char b);
 
 #endif

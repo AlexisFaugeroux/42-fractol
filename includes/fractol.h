@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 15:08:51 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:53:14 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ typedef struct s_fractal
 	bool				*escaped;
 	bool				smooth;
 	bool				color_shift;
+	int					base_iter;
 	int					max_iter;
 	int					last_computed_x;
 	int					last_computed_y;

@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:50:17 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 15:35:36 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:28:28 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # define OP_PER_COMPUTE 7
 # define MAX_OP_PER_FRAME 30000000
 
-# define BASE_ITER 100
 # define EXPONENT 0.3
 
 # include "fractol.h"

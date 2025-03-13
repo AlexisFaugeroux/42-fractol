@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/13 15:07:01 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/13 17:50:07 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,7 @@ SRCS_FILES		= fractol.c \
 				  compute/compute_colors.c \
 				  compute/compute_next_elem.c \
 				  init/init_computers.c \
+				  init/init_ensemble_params.c \
 				  init/init_fractal.c \
 				  init/init_hooks.c \
 				  init/init_theme.c \
@@ -53,6 +54,7 @@ SRCS_FILES		= fractol.c \
 				  handlers/mouse_handlers.c \
 				  parse/parse.c \
 				  parse/parse_color_shift.c \
+				  parse/parse_iter.c \
 				  parse/parse_name.c \
 				  parse/parse_smooth.c \
 				  parse/parse_theme.c \

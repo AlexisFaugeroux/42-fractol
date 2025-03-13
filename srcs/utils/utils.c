@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 15:53:36 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:35:15 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	reset_escaped(t_fractal *fractal)
 void	reset_params(t_fractal *fractal)
 {
 	reset_escaped(fractal);
-	fractal->max_iter = DEFAULT_MAX_ITER;
+	fractal->max_iter = fractal->base_iter;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
 	fractal->op_count = 0;

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:24 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 15:20:52 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:05:11 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	parse_arg(t_args *args, char *arg)
 		parse_smooth(args, arg);
 	else if (ft_strncmp(arg, "--color_shift=", 14) == 0)
 		parse_color_shift(args, arg);
+	else if (ft_strncmp(arg, "--iter=", 7) == 0)
+		parse_iter(args, arg);
 	else
 		handle_unknown_arg(args, arg);
 }
@@ -46,7 +48,8 @@ static void	init_parse(t_args *args)
 	args->name = NULL;
 	args->theme = NULL;
 	args->smooth = true;
-	args->smooth = false;
+	args->color_shift = false;
+	args->iter = DEFAULT_MAX_ITER;
 	args->julia_re = 0;
 	args->julia_im = 0;
 }

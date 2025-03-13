@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 15:08:35 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 17:51:41 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,11 @@
 
 static void	init_params(t_fractal *fractal, t_args *args)
 {
-	fractal->ens_name = ft_strdup(args->name);
-	if (!fractal->ens_name)
-	{
-		clean_args(args);
-		clean_and_exit_failure(fractal);
-	}
-	if (ft_strcmp(fractal->ens_name, "mandelbrot") == 0)
-		fractal->ens_id = 0;
-	else if (ft_strcmp(fractal->ens_name, "julia") == 0)
-	{
-		fractal->ens_id = 1;
-		fractal->julia_c.re = args->julia_re;
-		fractal->julia_c.im = args->julia_im;
-	}
-	else if (ft_strcmp(fractal->ens_name, "burning_ship") == 0)
-		fractal->ens_id = 2;
+	init_ensemble_params(fractal, args);
 	fractal->smooth = args->smooth;
 	fractal->color_shift = args->color_shift;
-	fractal->max_iter = DEFAULT_MAX_ITER;
+	fractal->base_iter = args->iter;
+	fractal->max_iter = args->iter;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
 	fractal->op_count = 0;
