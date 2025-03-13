@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:49:38 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 16:52:42 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:59:45 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 	double	scaled_x;
 	double	scaled_y;
 
-	scaled_x = fractal->computed_c[y * WIDTH + x].re;
-	scaled_y = fractal->computed_c[y * WIDTH + x].im;
+	scaled_x = fractal->pre_computed[y * WIDTH + x].re;
+	scaled_y = fractal->pre_computed[y * WIDTH + x].im;
 	if (keycode == 4)
 	{
 		reset_params(fractal);
@@ -40,6 +40,6 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 		fractal->zoom *= ZOOM_FACTOR;
 	}
 	shift_colors(fractal->theme);
-	compute_c(fractal);
+	pre_compute(fractal);
 	return (0);
 }

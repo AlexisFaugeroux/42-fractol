@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   init_computers.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:48:35 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 18:59:01 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/12 16:54:06 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/12 18:58:13 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include "../../includes/compute.h"
 
-# include "parse.h"
-
-t_fractal	*init_fractal(t_args *args);
-void		init_hooks(t_fractal *fractal);
-void		init_theme(t_fractal *fractal, t_args *args);
-/* void		init_computers(t_fractal *fractal); */
-
-#endif
+/* void	init_computers(t_fractal *fractal)
+{
+	fractal->computers[0] = compute_c_mandelbrot;
+	fractal->computers[1] = compute_c_julia;
+} */

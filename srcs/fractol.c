@@ -6,13 +6,21 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:25:58 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 11:30:38 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:16:40 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/init.h"
 #include "../includes/render.h"
 #include "../includes/utils.h"
+
+void	init_args(t_args *args)
+{
+	args->name = NULL;
+	args->julia_re = 0;
+	args->julia_im = 0;
+	args->theme = NULL;
+}
 
 int	main(int argc, char *argv[])
 {

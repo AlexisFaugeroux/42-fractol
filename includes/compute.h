@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:27:14 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/10 16:36:37 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:52:10 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ typedef struct s_scale
 	double	start_y;
 }				t_scale;
 
-void	compute_c(t_fractal *fractal);
+/* void	compute_c_mandelbrot(t_fractal *fractal);
+void	compute_c_julia(t_fractal *fractal); */
+void	pre_compute(t_fractal *fractal);
 void	compute_colors(t_theme *theme);
 void	shift_colors(t_theme *theme);
 void	compute_next_elem(t_complex *z, t_complex *c);

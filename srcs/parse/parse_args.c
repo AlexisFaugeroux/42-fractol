@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:09:33 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 18:56:09 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 11:11:03 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	parse_theme(t_args *args, char *arg)
 		handle_unknown_theme(args, arg);
 	else
 	{
+		if (args->theme)
+			free(args->theme);
 		args->theme = ft_strdup(arg + 8);
 		if (!args->theme)
 		{

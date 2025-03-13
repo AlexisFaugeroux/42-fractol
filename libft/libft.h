@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/08 15:42:50 by afaugero          #+#    #+#             */
-/*   Updated: 2025/01/29 16:45:48 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 15:01:21 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ bool	ft_isdigit(int c);
 bool	ft_isalnum(int c);
 bool	ft_isascii(int c);
 bool	ft_isprint(int c);
+bool	ft_isspace(int c);
 
 // print
 void	ft_putchar_fd(char c, int fd);
@@ -74,6 +75,7 @@ size_t	ft_strlcat(char *dst, char const *src, size_t dstsize);
 // convert
 int		ft_atoi(char const *nptr);
 long	ft_atol(char const *nptr);
+double	ft_atod(char const *nptr);
 char	*ft_itoa(int n);
 char	*ft_uitoa(unsigned int n);
 char	*ft_ulong_itoa_base(unsigned long nbr, char const *base_to);

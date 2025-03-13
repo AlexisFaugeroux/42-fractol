@@ -6,19 +6,11 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/11 11:52:47 by afaugero          #+#    #+#             */
-/*   Updated: 2025/01/18 15:29:11 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 12:00:54 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft.h"
-
-static int	ft_isspace(int c)
-{
-	if (c == ' ' || c == '\f' || c == '\n'
-		|| c == '\r' || c == '\t' || c == '\v')
-		return (1);
-	return (0);
-}
 
 int	ft_atoi(char const *nptr)
 {

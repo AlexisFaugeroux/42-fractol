@@ -6,21 +6,29 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/11 15:54:20 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:58:56 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/theme.h"
+#include "../../includes/init.h"
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
 static void	init_params(t_fractal *fractal, t_args *args)
 {
-	fractal->name = ft_strdup(args->name);
-	if (!fractal->name)
+	fractal->ens_name = ft_strdup(args->name);
+	if (!fractal->ens_name)
 	{
 		clean_args(args);
 		clean_and_exit_failure(fractal);
+	}
+	if (ft_strcmp(fractal->ens_name, "mandelbrot"))
+		fractal->ens_id = 0;
+	if (ft_strcmp(fractal->ens_name, "julia") == 0)
+	{
+		fractal->ens_id = 1;
+		fractal->julia_c.re = args->julia_re;
+		fractal->julia_c.im = args->julia_im;
 	}
 	fractal->max_iter = DEFAULT_MAX_ITER;
 	fractal->last_computed_x = 0;
@@ -42,8 +50,7 @@ static void	init_escaped(t_fractal *fractal)
 static void	init_img(t_fractal *fractal)
 {
 	fractal->img = (t_img *)malloc(sizeof(t_img));
-	fractal->buffer = (t_img *)malloc(sizeof(t_img));
-	if (!fractal->img | !fractal->buffer)
+	if (!fractal->img)
 	{
 		clean_up(fractal);
 		exit(EXIT_FAILURE);
@@ -84,7 +91,7 @@ t_fractal	*init_fractal(t_args *args)
 	init_theme(fractal, args);
 	init_escaped(fractal);
 	init_params(fractal, args);
-	compute_c(fractal);
+	pre_compute(fractal);
 	clean_args(args);
 	return (fractal);
 }

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.h                                             :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/03 11:48:35 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 18:59:01 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/12 11:55:21 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/12 11:57:18 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef INIT_H
-# define INIT_H
+#include "../libft.h"
 
-# include "parse.h"
-
-t_fractal	*init_fractal(t_args *args);
-void		init_hooks(t_fractal *fractal);
-void		init_theme(t_fractal *fractal, t_args *args);
-/* void		init_computers(t_fractal *fractal); */
-
-#endif
+bool	ft_isspace(int c)
+{
+	if (c == ' ' || c == '\f' || c == '\n'
+		|| c == '\r' || c == '\t' || c == '\v')
+		return (1);
+	return (0);
+}

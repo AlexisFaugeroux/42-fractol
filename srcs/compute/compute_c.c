@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/07 17:23:43 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 18:50:39 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_scale	*new_scale(t_fractal *fractal)
  *	scale->start_y + scale->scaled_step_y * y
  *	--> get position of current pixel in mandlebrot scale
  */
-void	compute_c(t_fractal *fractal)
+void	pre_compute(t_fractal *fractal)
 {
 	int			x;
 	int			y;
@@ -55,12 +55,37 @@ void	compute_c(t_fractal *fractal)
 		x = 0;
 		while (x < WIDTH)
 		{
-			fractal->computed_c[y * WIDTH + x].re = scale->start_x
+			fractal->pre_computed[y * WIDTH + x].re = scale->start_x
 				+ scale->scaled_step_x * x;
-			fractal->computed_c[y * WIDTH + x].im = im;
+			fractal->pre_computed[y * WIDTH + x].im = im;
 			x++;
 		}
 		y++;
 	}
 	free(scale);
 }
+
+/* void	compute_c_julia(t_fractal *fractal)
+{
+	int			x;
+	int			y;
+	double		im;
+	t_scale		*scale;
+
+	scale = new_scale(fractal);
+	y = 0;
+	while (y < HEIGHT)
+	{
+		im = scale->start_y + scale->scaled_step_y * y + fractal->julia_c.im;
+		x = 0;
+		while (x < WIDTH)
+		{
+			fractal->computed_c[y * WIDTH + x].re = scale->start_x
+				+ scale->scaled_step_x * x + fractal->julia_c.re;
+			fractal->computed_c[y * WIDTH + x].im = im;
+			x++;
+		}
+		y++;
+	}
+	free(scale);
+} */

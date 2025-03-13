@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 14:20:29 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 17:05:03 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 16:57:23 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "parse.h"
 
-void	init_theme(t_fractal *fractal, t_args *args);
 void	switch_theme(t_fractal *fractal);
 
 void	set_default(t_theme *theme);

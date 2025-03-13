@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/11 17:05:00 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/12 19:07:51 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	handle_arrows(int keycode, t_fractal *fractal)
 		reset_params(fractal);
 		fractal->offset_y -= OFFSET_FACTOR * fractal->zoom;
 	}
-	compute_c(fractal);
+	pre_compute(fractal);
 }
 
 int	handle_key_pressed(int keycode, t_fractal *fractal)
