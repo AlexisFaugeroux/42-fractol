@@ -6,7 +6,7 @@
 /*   By: alexis <alexis@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 10:30:23 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 18:49:30 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:30:28 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,10 @@ typedef struct s_fractal
 	struct s_theme		*theme;
 	char				*ens_name;
 	int					ens_id;
-	void				(*computers[2])(struct s_fractal *fractal);
 	struct s_complex	pre_computed[HEIGHT * WIDTH];
 	struct s_complex	julia_c;
 	bool				*escaped;
+	bool				smooth;
 	int					max_iter;
 	int					last_computed_x;
 	int					last_computed_y;

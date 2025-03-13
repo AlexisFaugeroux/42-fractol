@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/13 10:26:31 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/13 10:39:33 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,9 @@ SRCS_FILES		= fractol.c \
 				  handlers/key_handlers.c \
 				  handlers/mouse_handlers.c \
 				  parse/parse.c \
-				  parse/parse_args.c \
+				  parse/parse_name.c \
+				  parse/parse_smooth.c \
+				  parse/parse_theme.c \
 				  parse/parse_helpers.c \
 				  render/render.c \
 				  render/render_helpers.c \

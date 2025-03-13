@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 10:09:40 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:29:07 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,18 @@
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
-static int	get_color_index(t_fractal *fractal, t_complex z,
-			int pixel_pos, int index)
+static int	get_color_index(t_fractal *fractal, t_complex z, int index)
 {
 	double		smooth;
 
-	fractal->escaped[pixel_pos] = true;
-	smooth = smooth_factor(z, index);
-	smooth = log2(1 + smooth) / log2(fractal->max_iter);
-	index = (int)(smooth * 255);
-	return (index);
+	if (fractal->smooth)
+	{
+		smooth = smooth_factor(z, index);
+		smooth = log2(1 + smooth) / log2(fractal->max_iter);
+		index = (int)(smooth * 255);
+		return (index);
+	}
+	return (index * 255 / fractal->max_iter);
 }
 
 static int	get_color(t_fractal *fractal, int x, int y)
@@ -43,7 +45,8 @@ static int	get_color(t_fractal *fractal, int x, int y)
 	}
 	if (i == fractal->max_iter)
 		return (BLACK);
-	index = get_color_index(fractal, z, y * WIDTH + x, i);
+	fractal->escaped[y * WIDTH + x] = true;
+	index = get_color_index(fractal, z, i);
 	if (index >= 0)
 		return (fractal->theme->colors[index]);
 	return (fractal->theme->colors[0]);

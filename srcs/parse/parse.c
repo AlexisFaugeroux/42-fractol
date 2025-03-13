@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:24 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 15:44:06 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:44:39 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ static void	parse_arg(t_args *args, char *arg)
 {
 	if (ft_strncmp(arg, "--theme=", 8) == 0)
 		parse_theme(args, arg);
+	if (ft_strncmp(arg, "--smooth=", 9) == 0)
+		parse_smooth(args, arg);
+}
+
+static void	init_parse(t_args *args)
+{
+	args->name = NULL;
+	args->theme = NULL;
+	args->smooth = true;
+	args->julia_re = 0;
+	args->julia_im = 0;
 }
 
 void	parse(t_args *args, int argc, char *argv[])
@@ -31,6 +42,7 @@ void	parse(t_args *args, int argc, char *argv[])
 
 	if (argc < 2)
 		handle_too_few_arguments();
+	init_parse(args);
 	parse_name(args, argv[1]);
 	args->theme = ft_strdup("default");
 	if (!args->theme)

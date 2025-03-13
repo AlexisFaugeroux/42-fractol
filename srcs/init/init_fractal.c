@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 10:03:09 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:38:48 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	init_params(t_fractal *fractal, t_args *args)
 	}
 	else if (ft_strcmp(fractal->ens_name, "burning_ship") == 0)
 		fractal->ens_id = 2;
+	fractal->smooth = args->smooth;
 	fractal->max_iter = DEFAULT_MAX_ITER;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
