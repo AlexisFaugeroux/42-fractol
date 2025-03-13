@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_name.c                                       :+:      :+:    :+:   */
+/*   parse_color_shift.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/11 11:09:33 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 15:01:44 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/13 14:52:39 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/13 15:05:28 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
 
-static void	handle_unknown_name(t_args *args, char *arg)
+static void	handle_unknown_color_shift(t_args *args, char *arg)
 {
-	ft_putstr_fd("Error: unknown ensemble name ", 2);
+	ft_putstr_fd("Error: unknown color shift value ", 2);
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd("\n\n", 2);
 	display_params_list();
@@ -22,19 +22,14 @@ static void	handle_unknown_name(t_args *args, char *arg)
 	exit(EXIT_FAILURE);
 }
 
-void	parse_name(t_args *args, char *arg)
+void	parse_color_shift(t_args *args, char *arg)
 {
-	if (ft_strcmp(arg, "mandelbrot") == 0
-		|| ft_strcmp(arg, "julia") == 0
-		|| ft_strcmp(arg, "burning_ship") == 0)
-	{
-		args->name = ft_strdup(arg);
-		if (!args->name)
-		{
-			clean_args(args);
-			exit(EXIT_FAILURE);
-		}
-	}
+	if (ft_strcmp(arg + 14, "true") && ft_strcmp(arg + 14, "false"))
+		handle_unknown_color_shift(args, arg);
+	if (ft_strcmp(arg + 14, "true") == 0)
+		args->color_shift = true;
+	else if (ft_strcmp(arg + 14, "false") == 0)
+		args->color_shift = false;
 	else
-		handle_unknown_name(args, arg);
+		args->color_shift = true;
 }

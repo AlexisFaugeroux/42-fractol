@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:57:26 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 10:56:44 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 15:06:28 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	display_params_list(void)
 	ft_putstr_fd(" sky, psyche, autumn, tokyonight, dracula\n\n", 1);
 	ft_putstr_fd("\t--smooth=<value>\t", 1);
 	ft_putstr_fd("Smooth colors transition\n\t\t\t\t", 1);
+	ft_putstr_fd("Can be set to 'true' or 'false'. Defaults to 'true'.\n\n", 1);
+	ft_putstr_fd("\t--color_shift=<value>\t", 1);
+	ft_putstr_fd("Colors change over zoom/dezoom\n\t\t\t\t", 1);
 	ft_putstr_fd("Can be set to 'true' or 'false'. Defaults to 'true'.\n\n", 1);
 }
 
