@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 11:09:33 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 11:11:03 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:56:43 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ void	handle_unknown_theme(t_args *args, char *arg)
 void	parse_name(t_args *args, char *arg)
 {
 	if (ft_strcmp(arg, "mandelbrot") == 0
-		|| ft_strcmp(arg, "julia") == 0)
+		|| ft_strcmp(arg, "julia") == 0
+		|| ft_strcmp(arg, "burning_ship") == 0)
 	{
 		args->name = ft_strdup(arg);
 		if (!args->name)

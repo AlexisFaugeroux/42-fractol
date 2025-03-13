@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 10:50:47 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 18:57:51 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:03:50 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ double	smooth_factor(t_complex z, int iteration)
 void	init_complex(t_fractal *fractal, t_complex *z,
 			t_complex *c, int pixel_pos)
 {
-	if (fractal->ens_id == 0)
+	if (fractal->ens_id == 0 || fractal->ens_id == 2)
 	{
 		z->re = 0;
 		z->im = 0;

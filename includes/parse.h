@@ -6,13 +6,15 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:07 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 11:16:05 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:55:50 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fractol.h"
+#ifndef PARSE_H
+# define PARSE_H
+# include "fractol.h"
 
-typedef struct	s_args
+typedef struct s_args
 {
 	char	*name;
 	double	julia_re;
@@ -25,3 +27,5 @@ void	parse_name(t_args *args, char *arg);
 void	parse_theme(t_args *args, char *arg);
 void	display_params_list(void);
 void	clean_args(t_args *args);
+
+#endif

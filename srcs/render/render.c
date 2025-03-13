@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/09 18:33:20 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:09:40 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	get_color(t_fractal *fractal, int x, int y)
 	i = 0;
 	while (i < fractal->max_iter && ((z.re * z.re) + (z.im * z.im)) <= 4)
 	{
-		compute_next_elem(&z, &c);
+		compute_next_elem(fractal->ens_id, &z, &c);
 		fractal->op_count += OP_PER_COMPUTE;
 		i++;
 	}

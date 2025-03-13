@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:27:14 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 18:52:10 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:09:21 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "fractol.h"
 
-#define PI 3.14159265358979323846
+# define PI 3.14159265358979323846
 
 typedef struct s_scale
 {
@@ -25,11 +25,9 @@ typedef struct s_scale
 	double	start_y;
 }				t_scale;
 
-/* void	compute_c_mandelbrot(t_fractal *fractal);
-void	compute_c_julia(t_fractal *fractal); */
 void	pre_compute(t_fractal *fractal);
 void	compute_colors(t_theme *theme);
 void	shift_colors(t_theme *theme);
-void	compute_next_elem(t_complex *z, t_complex *c);
+void	compute_next_elem(int ens_id, t_complex *z, t_complex *c);
 
 #endif

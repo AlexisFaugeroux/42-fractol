@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 16:52:10 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:42:24 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	clean_up(t_fractal *fractal)
 {
 	if (fractal->img)
 		free(fractal->img);
-	/* if (fractal->win && OS_CODE == 1)
+	if (fractal->win)
 	{
 		mlx_destroy_display(fractal->win->connection);
 		free(fractal->win);
-	} */
+	}
 	if (fractal->ens_name)
 		free(fractal->ens_name);
 	if (fractal->theme)

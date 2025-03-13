@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   compute_c.c                                        :+:      :+:    :+:   */
+/*   pre_compute.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/12 18:50:39 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 09:53:40 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,28 +64,3 @@ void	pre_compute(t_fractal *fractal)
 	}
 	free(scale);
 }
-
-/* void	compute_c_julia(t_fractal *fractal)
-{
-	int			x;
-	int			y;
-	double		im;
-	t_scale		*scale;
-
-	scale = new_scale(fractal);
-	y = 0;
-	while (y < HEIGHT)
-	{
-		im = scale->start_y + scale->scaled_step_y * y + fractal->julia_c.im;
-		x = 0;
-		while (x < WIDTH)
-		{
-			fractal->computed_c[y * WIDTH + x].re = scale->start_x
-				+ scale->scaled_step_x * x + fractal->julia_c.re;
-			fractal->computed_c[y * WIDTH + x].im = im;
-			x++;
-		}
-		y++;
-	}
-	free(scale);
-} */
