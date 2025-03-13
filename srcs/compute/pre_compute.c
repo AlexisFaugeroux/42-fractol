@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:21:30 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 09:53:40 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:27:18 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_scale	*new_scale(t_fractal *fractal)
 
 	scale = (t_scale *)malloc(sizeof(t_scale));
 	if (!scale)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 	scale->scaled_step_x = 4.0 / (double)WIDTH * fractal->zoom;
 	scale->scaled_step_y = 4.0 / (double)HEIGHT * fractal->zoom;
 	scale->start_x = -2.0 * fractal->zoom + fractal->offset_x;

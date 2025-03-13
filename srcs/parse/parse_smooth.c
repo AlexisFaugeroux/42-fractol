@@ -6,11 +6,12 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:40:04 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 13:37:10 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:20:55 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
+#include "../../includes/utils.h"
 
 static void	handle_unknown_smooth(t_args *args, char *arg)
 {
@@ -18,8 +19,7 @@ static void	handle_unknown_smooth(t_args *args, char *arg)
 	ft_putstr_fd(arg + 9, 2);
 	ft_putstr_fd("\n\n", 2);
 	display_params_list();
-	clean_args(args);
-	exit(EXIT_FAILURE);
+	clean_and_exit(NULL, args, EXIT_SUCCESS);
 }
 
 void	parse_smooth(t_args *args, char *arg)

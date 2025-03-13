@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 10:30:43 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 16:56:51 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:15:26 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,10 @@ void	init_theme(t_fractal *fractal, t_args *args)
 {
 	fractal->theme = (t_theme *)malloc(sizeof(t_theme));
 	if (!fractal->theme)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 	fractal->theme->name = ft_strdup(args->theme);
 	if (!fractal->theme->name)
-	{
-		clean_args(args);
-		clean_and_exit_failure(fractal);
-	}
+		clean_and_exit(fractal, args, EXIT_FAILURE);
 	fractal->theme->shift = 0;
 	set_theme(fractal->theme);
 	init_setters(fractal->theme);

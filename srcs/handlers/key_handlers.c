@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 18:09:36 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:12:37 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,6 @@
 #include "../../includes/compute.h"
 #include "../../includes/theme.h"
 #include "../../includes/utils.h"
-
-void	handle_escape(t_fractal *fractal)
-{
-	clean_up(fractal);
-	exit(EXIT_SUCCESS);
-}
 
 void	handle_arrows(int keycode, t_fractal *fractal)
 {
@@ -49,7 +43,7 @@ void	handle_arrows(int keycode, t_fractal *fractal)
 int	handle_key_pressed(int keycode, t_fractal *fractal)
 {
 	if (keycode == ESCAPE_KEY)
-		handle_escape(fractal);
+		clean_and_exit(fractal, NULL, EXIT_SUCCESS);
 	else if (keycode == T_KEY)
 		switch_theme(fractal);
 	else

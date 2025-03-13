@@ -6,11 +6,12 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:24 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 17:05:11 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:17:25 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
+#include "../../includes/utils.h"
 
 static void	handle_too_few_arguments(void)
 {
@@ -25,8 +26,7 @@ static void	handle_unknown_arg(t_args *args, char *arg)
 	ft_putstr_fd(arg, 2);
 	ft_putstr_fd("\n\n", 2);
 	display_params_list();
-	clean_args(args);
-	exit(EXIT_FAILURE);
+	clean_and_exit(NULL, args, EXIT_SUCCESS);
 }
 
 static void	parse_arg(t_args *args, char *arg)
@@ -43,7 +43,7 @@ static void	parse_arg(t_args *args, char *arg)
 		handle_unknown_arg(args, arg);
 }
 
-static void	init_parse(t_args *args)
+static void	init_args(t_args *args)
 {
 	args->name = NULL;
 	args->theme = NULL;
@@ -60,14 +60,11 @@ void	parse(t_args *args, int argc, char *argv[])
 
 	if (argc < 2)
 		handle_too_few_arguments();
-	init_parse(args);
+	init_args(args);
 	parse_name(args, argv[1]);
 	args->theme = ft_strdup("default");
 	if (!args->theme)
-	{
-		clean_args(args);
-		exit(EXIT_FAILURE);
-	}
+		clean_and_exit(NULL, args, EXIT_FAILURE);
 	i = 2;
 	if (ft_strcmp(args->name, "julia") == 0)
 	{

@@ -6,11 +6,12 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 10:35:18 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 10:46:43 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:21:38 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parse.h"
+#include "../../includes/utils.h"
 
 static void	handle_unknown_theme(t_args *args, char *arg)
 {
@@ -18,8 +19,7 @@ static void	handle_unknown_theme(t_args *args, char *arg)
 	ft_putstr_fd(arg + 8, 2);
 	ft_putstr_fd("\n\n", 2);
 	display_params_list();
-	clean_args(args);
-	exit(EXIT_FAILURE);
+	clean_and_exit(NULL, args, EXIT_SUCCESS);
 }
 
 void	parse_theme(t_args *args, char *arg)
@@ -41,10 +41,7 @@ void	parse_theme(t_args *args, char *arg)
 			free(args->theme);
 		args->theme = ft_strdup(arg + 8);
 		if (!args->theme)
-		{
-			clean_args(args);
-			exit(EXIT_FAILURE);
-		}
+			clean_and_exit(NULL, args, EXIT_FAILURE);
 	}
 	else
 		handle_unknown_theme(args, arg);

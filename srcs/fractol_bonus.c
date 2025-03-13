@@ -1,24 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb.c                                              :+:      :+:    :+:   */
+/*   fractol_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/09 18:12:39 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 10:31:32 by afaugero         ###   ########.fr       */
+/*   Created: 2025/03/13 20:29:57 by afaugero          #+#    #+#             */
+/*   Updated: 2025/03/13 20:29:59 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	extract_rgb(int color, unsigned char *r,
-				unsigned char *g, unsigned char *b)
-{
-	*r = (color >> 16) & 0xFF;
-	*g = (color >> 8) & 0xFF;
-	*b = color & 0xFF;
-}
+#include "../includes/init.h"
+#include "../includes/render.h"
+#include "../includes/utils.h"
 
-int	build_color(unsigned char r, unsigned char g, unsigned char b)
+int	main(int argc, char *argv[])
 {
-	return ((r << 16) | (g << 8) | b);
+	t_args		args;
+	t_fractal	*fractal;
+
+	parse(&args, argc, argv);
+	fractal = init_fractal(&args);
+	init_hooks(fractal);
+	mlx_loop_hook(fractal->win->connection, (void *)render, fractal);
+	mlx_loop(fractal->win->connection);
+	clean_up(fractal);
+	return (0);
 }

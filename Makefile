@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/13 17:50:07 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/13 21:00:27 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ WHITE    		= "\033[37m"    # White
 
 # Compiler
 NAME			= fractol
+BONUS_FLAG 		= .bonus_mode
 CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -O2
 OS				= $(shell uname)
@@ -40,11 +41,11 @@ INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 
 # Sources
 SRCS_DIR		= srcs/
-SRCS_FILES		= fractol.c \
-				  compute/pre_compute.c \
+SRCS_MAIN		= fractol.c
+SRCS_MAIN_BONUS	= fractol_bonus.c
+SRCS_FILES		=	compute/pre_compute.c \
 				  compute/compute_colors.c \
 				  compute/compute_next_elem.c \
-				  init/init_computers.c \
 				  init/init_ensemble_params.c \
 				  init/init_fractal.c \
 				  init/init_hooks.c \
@@ -58,7 +59,6 @@ SRCS_FILES		= fractol.c \
 				  parse/parse_name.c \
 				  parse/parse_smooth.c \
 				  parse/parse_theme.c \
-				  parse/parse_helpers.c \
 				  render/render.c \
 				  render/render_helpers.c \
 				  theme/set_theme_basic_colors.c \
@@ -66,14 +66,17 @@ SRCS_FILES		= fractol.c \
 				  theme/set_theme_ide.c \
 				  theme/set_theme_others.c \
 				  theme/switch_theme.c \
-				  utils/rgb.c \
+				  utils/clean.c \
 				  utils/utils.c
-SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
+SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_MAIN)) $(addprefix $(SRCS_DIR), $(SRCS_FILES))
+SRCS_BONUS		= $(addprefix $(SRCS_DIR), $(SRCS_MAIN_BONUS)) $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
 # Objects
 OBJS_DIR		= objs/
-OBJS_FILES		= $(SRCS_FILES:.c=.o)
+OBJS_FILES		= $(SRCS_MAIN:.c=.o) $(SRCS_FILES:.c=.o)
+OBJS_FILES_BONUS	= $(SRCS_MAIN_BONUS:.c=.o) $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR), $(OBJS_FILES))
+OBJS_BONUS		= $(addprefix $(OBJS_DIR), $(OBJS_FILES_BONUS))
 
 ifeq ($(OS), Linux)
 	MLX_DIR			= mlx_linux
@@ -88,6 +91,7 @@ else
 endif
 
 all: $(LIBFT) $(OBJS_DIR) ${NAME}
+	@rm -rf $(BONUS_FLAG)
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c $(INCLUDES) | $(OBJS_DIR)
 	@${CC} $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
@@ -110,9 +114,18 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@${CC} ${CFLAGS} ${OBJS} -o ${NAME} $(LINKER)
 	@echo $(GREEN)"$(NAME) compiled" $(RESET)
 
+bonus: $(BONUS_FLAG)
+
+$(BONUS_FLAG): $(OBJS_BONUS) $(LIBFT) $(MLX)
+	@echo "compiling $(NAME)..."
+	@${CC} ${CFLAGS} ${OBJS_BONUS} -o ${NAME} $(LINKER)
+	@touch $(BONUS_FLAG)
+	@echo $(GREEN)"$(NAME) compiled" $(RESET)
+
 clean:
 	@echo "deleting objects directory..."
 	@rm -rf $(OBJS_DIR)
+	@rm -rf $(BONUS_FLAG)
 	@echo $(GREEN) "objects deleted" $(RESET)
 
 fclean: clean

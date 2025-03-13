@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:07 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 18:22:53 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:25:25 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,5 @@ void	parse_smooth(t_args *args, char *arg);
 void	parse_color_shift(t_args *args, char *arg);
 void	parse_iter(t_args *args, char *arg);
 void	display_params_list(void);
-void	clean_args(t_args *args);
 
 #endif

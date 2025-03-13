@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:06:50 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 17:51:41 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 20:24:59 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	init_escaped(t_fractal *fractal)
 {
 	fractal->escaped = (bool *)malloc(sizeof(bool) * HEIGHT * WIDTH);
 	if (!fractal->escaped)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 	reset_escaped(fractal);
 }
 
@@ -59,14 +59,14 @@ static void	init_win(t_fractal *fractal)
 {
 	fractal->win = (t_win *)malloc(sizeof(t_win));
 	if (!fractal->win)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 	fractal->win->connection = mlx_init();
 	if (!fractal->win->connection)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 	fractal->win->win_ptr = mlx_new_window(fractal->win->connection,
 			WIDTH, HEIGHT, "Fractol");
 	if (!fractal->win->win_ptr)
-		clean_and_exit_failure(fractal);
+		clean_and_exit(fractal, NULL, EXIT_FAILURE);
 }
 
 t_fractal	*init_fractal(t_args *args)
@@ -75,7 +75,7 @@ t_fractal	*init_fractal(t_args *args)
 
 	fractal = (t_fractal *)malloc(sizeof(t_fractal));
 	if (!fractal)
-		exit(EXIT_FAILURE);
+		clean_and_exit(NULL, args, EXIT_FAILURE);
 	init_win(fractal);
 	init_img(fractal);
 	init_theme(fractal, args);
