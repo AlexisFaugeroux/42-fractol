@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 16:03:30 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 17:42:33 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:22:09 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	handle_invalid_iter(t_args *args, char *arg)
 
 void	parse_iter(t_args *args, char *arg)
 {
-	unsigned char	iter;
+	int	iter;
 
 	iter = ft_atoi(arg + 7);
 	if (iter < 30 || iter > 255)

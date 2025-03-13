@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 21:05:09 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 13:52:59 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:09:36 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,6 @@
 
 void	handle_escape(t_fractal *fractal)
 {
-	if (fractal->img->img_ptr)
-		mlx_destroy_image(fractal->win->connection, fractal->img->img_ptr);
-	mlx_destroy_window(fractal->win->connection, fractal->win->win_ptr);
 	clean_up(fractal);
 	exit(EXIT_SUCCESS);
 }

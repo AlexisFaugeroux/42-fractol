@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 17:35:15 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:18:41 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ void	put_pixel_to_image(t_img *img, int x, int y, int color)
 void	clean_up(t_fractal *fractal)
 {
 	if (fractal->img)
+	{
+		if (fractal->img->img_ptr)
+			mlx_destroy_image(fractal->win->connection, fractal->img->img_ptr);
 		free(fractal->img);
+	}
 	if (fractal->win)
 	{
+		mlx_destroy_window(fractal->win->connection, fractal->win->win_ptr);
 		mlx_destroy_display(fractal->win->connection);
+		free(fractal->win->connection);
 		free(fractal->win);
 	}
 	if (fractal->ens_name)

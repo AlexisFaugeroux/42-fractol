@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 10:28:07 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 17:23:10 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 18:22:53 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 
 typedef struct s_args
 {
-	char			*name;
-	char			*theme;
-	bool			smooth;
-	bool			color_shift;
-	unsigned char	iter;
-	double			julia_re;
-	double			julia_im;
+	char	*name;
+	char	*theme;
+	bool	smooth;
+	bool	color_shift;
+	int		iter;
+	double	julia_re;
+	double	julia_im;
 }				t_args;
 
 void	parse(t_args *args, int argc, char *argv[]);
