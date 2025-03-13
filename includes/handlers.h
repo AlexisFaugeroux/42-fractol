@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:48:47 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/11 16:58:34 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 13:52:08 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 #  define ARROW_RIGHT_KEY 65363
 #  define ARROW_UP_KEY 65364
 #  define ARROW_DOWN_KEY 65362
-#  define T_KEY 17
+#  define T_KEY 116
 # endif
 
 # define ZOOM_FACTOR 1.1
