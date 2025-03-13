@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:49:38 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 18:59:45 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:25:06 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,9 @@
 #include "../../includes/compute.h"
 #include "../../includes/utils.h"
 
-int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
+static void	handle_zoom(t_fractal *fractal, int keycode,
+				double scaled_x, double scaled_y)
 {
-	double	scaled_x;
-	double	scaled_y;
-
-	scaled_x = fractal->pre_computed[y * WIDTH + x].re;
-	scaled_y = fractal->pre_computed[y * WIDTH + x].im;
 	if (keycode == 4)
 	{
 		reset_params(fractal);
@@ -39,6 +35,16 @@ int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
 			+ (fractal->offset_y - scaled_y) * ZOOM_FACTOR;
 		fractal->zoom *= ZOOM_FACTOR;
 	}
+}
+
+int	handle_mouse_event(int keycode, int x, int y, t_fractal *fractal)
+{
+	double	scaled_x;
+	double	scaled_y;
+
+	scaled_x = fractal->pre_computed[y * WIDTH + x].re;
+	scaled_y = fractal->pre_computed[y * WIDTH + x].im;
+	handle_zoom(fractal, keycode, scaled_x, scaled_y);
 	shift_colors(fractal->theme);
 	pre_compute(fractal);
 	return (0);

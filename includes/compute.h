@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/04 15:27:14 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 10:09:21 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:28:15 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 # define COMPUTE_H
 
 # include "fractol.h"
-
-# define PI 3.14159265358979323846
 
 typedef struct s_scale
 {

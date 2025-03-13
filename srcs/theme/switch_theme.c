@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 16:27:18 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/12 10:31:59 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:18:59 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	switch_theme(t_fractal *fractal)
 {
 	if (fractal->theme->current == 10)
 	{
-		fractal->theme->current= 0;
+		fractal->theme->current = 0;
 		fractal->theme->
 			setters[fractal->theme->current](fractal->theme);
 		return ;

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:22:59 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/10 17:24:17 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:19:22 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void	shift_colors(t_theme *theme)
 		index_low = (int)(t * (PALETTE_SIZE - 1));
 		t_corrected = t * (PALETTE_SIZE - 1) - index_low;
 		theme->colors[i] = interpolate_color(
-			t_corrected,
-			theme->palette[index_low],
-			theme->palette[(index_low + 1) % PALETTE_SIZE]);
+				t_corrected,
+				theme->palette[index_low],
+				theme->palette[(index_low + 1) % PALETTE_SIZE]);
 		i++;
 	}
 }

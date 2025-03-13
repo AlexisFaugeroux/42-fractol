@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/12 17:00:28 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/13 10:26:31 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,21 +27,21 @@ CC				= cc
 CFLAGS			= -Wall -Wextra -Werror -O2
 OS				= $(shell uname)
 
-#Libraries
+# Libraries
 LIBFT_DIR		= libft
 LIBFT				= $(LIBFT_DIR)/libft.a
 LINKER			= -L$(LIBFT_DIR) -lft
 
-#Includes
+# Includes
 INCLUDES_DIR	= includes
 INCLUDES_FLAGS	= -I$(INCLUDES_DIR) -I$(LIBFT_DIR)
 INCLUDES		= $(wildcard $(INCLUDES_DIR)/*.h) \
 				  $(LIBFT_DIR)/libft.h
 
-#Sources
+# Sources
 SRCS_DIR		= srcs/
 SRCS_FILES		= fractol.c \
-				  compute/compute_c.c \
+				  compute/pre_compute.c \
 				  compute/compute_colors.c \
 				  compute/compute_next_elem.c \
 				  init/init_computers.c \
@@ -65,7 +65,7 @@ SRCS_FILES		= fractol.c \
 				  utils/utils.c
 SRCS			= $(addprefix $(SRCS_DIR), $(SRCS_FILES))
 
-#Objects
+# Objects
 OBJS_DIR		= objs/
 OBJS_FILES		= $(SRCS_FILES:.c=.o)
 OBJS			= $(addprefix $(OBJS_DIR), $(OBJS_FILES))

@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/07 17:04:01 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/11 16:23:35 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/13 10:20:26 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	set_purple(t_theme *theme)
 	theme->palette[10] = 0x001f1153;
 	theme->palette[11] = 0x00649ccc;
 }
+
 void	set_black_white(t_theme *theme)
 {
 	theme->current = 4;
