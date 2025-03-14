@@ -6,7 +6,7 @@
 /*   By: alexis <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/03 11:10:43 by alexis            #+#    #+#             */
-/*   Updated: 2025/03/13 20:23:19 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:53:53 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	display_params_list(void)
 	ft_putstr_fd("Can be set to 'true' or 'false'. Defaults to 'true'.\n\n", 1);
 	ft_putstr_fd("\t--color_shift=<value>\t", 1);
 	ft_putstr_fd("Colors change over zoom/dezoom\n\t\t\t\t", 1);
-	ft_putstr_fd("Can be set to 'true' or 'false'. Defaults to 'true'.\n\n", 1);
+	ft_putstr_fd("Can be set to 'true' or 'false'. Defaults to 'false'.\n\n", 1);
 }
 
 void	put_pixel_to_image(t_img *img, int x, int y, int color)
@@ -52,7 +52,6 @@ void	reset_escaped(t_fractal *fractal)
 void	reset_params(t_fractal *fractal)
 {
 	reset_escaped(fractal);
-	fractal->max_iter = fractal->base_iter;
 	fractal->last_computed_x = 0;
 	fractal->last_computed_y = 0;
 	fractal->op_count = 0;

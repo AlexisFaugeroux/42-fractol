@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/28 14:32:27 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 17:38:08 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:49:00 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ static void	put_image(t_fractal *fractal)
 	scaled_iter = fractal->base_iter * pow(1.0 / fractal->zoom, EXPONENT);
 	if (fractal->max_iter < scaled_iter)
 		fractal->max_iter = (int)(fractal->max_iter * 0.9 + scaled_iter * 0.1);
+	else
+		fractal->max_iter = fractal->base_iter;
 }
 
 void	render(t_fractal *fractal)

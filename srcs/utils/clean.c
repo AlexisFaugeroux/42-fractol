@@ -6,7 +6,7 @@
 /*   By: afaugero <afaugero@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 19:59:36 by afaugero          #+#    #+#             */
-/*   Updated: 2025/03/13 21:01:41 by afaugero         ###   ########.fr       */
+/*   Updated: 2025/03/14 09:38:25 by afaugero         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,3 @@ void	clean_and_exit(t_fractal *fractal, t_args *args, int status)
 		clean_up(fractal);
 	exit(status);
 }
-

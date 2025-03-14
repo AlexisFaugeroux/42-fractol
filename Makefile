@@ -6,7 +6,7 @@
 #    By: alexis <alexis@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/16 16:50:54 by afaugero          #+#    #+#              #
-#    Updated: 2025/03/13 21:00:27 by afaugero         ###   ########.fr        #
+#    Updated: 2025/03/14 10:03:21 by afaugero         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -90,7 +90,7 @@ else
 	INCLUDES_FLAG	+= -I$(MLX_DIR)
 endif
 
-all: $(LIBFT) $(OBJS_DIR) ${NAME}
+all: git-submodule $(LIBFT) $(OBJS_DIR) ${NAME}
 	@rm -rf $(BONUS_FLAG)
 
 $(OBJS_DIR)%.o:	$(SRCS_DIR)%.c $(INCLUDES) | $(OBJS_DIR)
@@ -114,13 +114,19 @@ $(NAME): $(OBJS) $(LIBFT) $(MLX)
 	@${CC} ${CFLAGS} ${OBJS} -o ${NAME} $(LINKER)
 	@echo $(GREEN)"$(NAME) compiled" $(RESET)
 
-bonus: $(BONUS_FLAG)
+bonus: git-submodule $(BONUS_FLAG)
 
 $(BONUS_FLAG): $(OBJS_BONUS) $(LIBFT) $(MLX)
 	@echo "compiling $(NAME)..."
 	@${CC} ${CFLAGS} ${OBJS_BONUS} -o ${NAME} $(LINKER)
 	@touch $(BONUS_FLAG)
 	@echo $(GREEN)"$(NAME) compiled" $(RESET)
+
+# Sub-modules
+git-submodule:
+	@echo "initializing and updating sub modules..."
+	@git submodule update --init --recursive
+	@echo $(GREEN)"submodules ready" $(RESET)
 
 clean:
 	@echo "deleting objects directory..."
